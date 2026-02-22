@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#09100f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FreeMe">
+  <link rel="manifest" href="./manifest.json">
+  <title>FreeMe — מסע שיפור עצמי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+/* FreeMe – Warm Depth Design System */
+:root{
+  --bg-0:#09100f;--bg-1:#0f1a18;--bg-2:#162421;--bg-3:#1e302c;
+  --bg-glass:rgba(22,36,33,0.88);
+  --gold:#e8a832;--gold-d:rgba(232,168,50,0.15);--gold-t:#f5c96a;
+  --green:#4ecb8a;--green-d:rgba(78,203,138,0.13);
+  --red:#e05454;--red-d:rgba(224,84,84,0.15);
+  --blue:#5b9be8;--blue-d:rgba(91,155,232,0.13);
+  --purple:#a78bfa;--purple-d:rgba(167,139,250,0.13);
+  --t1:#e2ddd4;--t2:#9fa8a0;--t3:#5e6b65;
+  --bdr:rgba(255,255,255,0.06);--bdr-s:rgba(255,255,255,0.04);
+  --sh-gold:0 4px 20px rgba(232,168,50,0.22);
+  --r1:8px;--r2:14px;--r3:20px;--r4:28px;--rf:100px;
+  --nav-h:70px;
+  --fd:'Playfair Display',serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --t:0.22s cubic-bezier(0.4,0,0.2,1);
+  --sp:0.38s cubic-bezier(0.34,1.56,0.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{background:var(--bg-0);color:var(--t1);font-family:var(--fb);font-weight:400;line-height:1.6;direction:rtl;-webkit-font-smoothing:antialiased;overflow:hidden;height:100dvh}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input,textarea,select{font-family:inherit;direction:rtl}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:600;line-height:1.3}
+a{color:var(--gold);text-decoration:none}
+img{max-width:100%}
+
+/* Shell */
+#app{position:relative;height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+#main-content{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+#main-content::-webkit-scrollbar{display:none}
+
+/* Loading */
+#loading-screen{position:fixed;inset:0;background:var(--bg-0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:9999;transition:opacity .5s,visibility .5s}
+#loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-logo{font-family:var(--fd);font-size:2.6rem;font-weight:700;color:var(--gold);letter-spacing:-.02em}
+.loading-sub{font-size:.82rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.loading-dots{display:flex;gap:8px}
+.loading-dots span{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.3;animation:ldot 1.4s infinite}
+.loading-dots span:nth-child(2){animation-delay:.2s}
+.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes ldot{0%,80%,100%{opacity:.3;transform:scale(1)}40%{opacity:1;transform:scale(1.3)}}
+
+/* Bottom Nav */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bdr);display:flex;z-index:100}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--t3);transition:color var(--t);-webkit-tap-highlight-color:transparent;position:relative}
+.nav-item.active{color:var(--gold)}
+.nav-item::before{content:'';position:absolute;top:0;width:20px;height:2px;background:var(--gold);border-radius:0 0 var(--rf) var(--rf);transform:scaleX(0);transition:transform var(--sp)}
+.nav-item.active::before{transform:scaleX(1)}
+.nav-icon{font-size:1.3rem;line-height:1;transition:transform var(--sp)}
+.nav-item.active .nav-icon{transform:translateY(-2px)}
+.nav-label{font-size:.6rem;font-weight:500;letter-spacing:.03em}
+
+/* SOS FAB */
+.sos-fab{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);left:50%;transform:translateX(-50%);width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.05em;z-index:200;box-shadow:0 4px 20px rgba(224,84,84,.5);border:2px solid rgba(255,255,255,.2);transition:transform var(--sp),box-shadow var(--t);-webkit-tap-highlight-color:transparent}
+.sos-fab:active{transform:translateX(-50%) scale(.9)}
+
+/* SOS Overlay */
+.sos-overlay{position:fixed;inset:0;background:var(--bg-0);z-index:500;display:flex;flex-direction:column;align-items:center;padding:56px 24px 40px;overflow-y:auto;transition:opacity .3s,visibility .3s}
+.sos-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.sos-pulse{width:76px;height:76px;border-radius:50%;background:var(--red-d);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:18px;animation:spulse 2s infinite}
+@keyframes spulse{0%,100%{box-shadow:0 0 0 0 rgba(224,84,84,.4)}50%{box-shadow:0 0 0 18px rgba(224,84,84,0)}}
+.sos-title{font-size:1.5rem;text-align:center;margin-bottom:6px}
+.sos-sub{color:var(--t2);text-align:center;margin-bottom:28px;font-size:.9rem}
+.sos-options{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px}
+.sos-option{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r3);padding:18px;display:flex;align-items:center;gap:14px;color:var(--t1);transition:all var(--t);text-align:right}
+.sos-option:active{background:var(--bg-3);transform:scale(.98)}
+.sos-opt-icon{font-size:1.9rem;flex-shrink:0}
+.sos-opt-title{font-weight:600;margin-bottom:2px;font-size:.93rem}
+.sos-opt-desc{font-size:.75rem;color:var(--t2)}
+.sos-close-btn{margin-top:20px;color:var(--t3);font-size:.87rem;padding:12px 24px}
+
+/* Breathing */
+.breathing-screen{position:fixed;inset:0;background:var(--bg-0);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px}
+.breath-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:36px}
+.breath-ring{width:220px;height:220px;border-radius:50%;background:var(--blue-d);position:absolute;animation:bring 8s ease-in-out infinite}
+@keyframes bring{0%,100%{transform:scale(.82);opacity:.4}38%{transform:scale(1.48);opacity:0}62%{transform:scale(1.05);opacity:.25}}
+.breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--blue) 0%,rgba(91,155,232,.3) 70%,transparent 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;animation:bcirc 8s ease-in-out infinite;position:relative;z-index:1}
+@keyframes bcirc{0%,100%{transform:scale(.82)}38%{transform:scale(1.28)}62%{transform:scale(1.28)}}
+.breath-count{font-size:2.2rem;font-family:var(--fd);color:#fff}
+.breath-phase-text{font-size:.65rem;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.breath-label{font-size:1.15rem;color:var(--t1);text-align:center;margin-bottom:6px}
+.breath-instruction{font-size:.95rem;color:var(--blue);text-align:center;margin-bottom:28px;font-weight:500;min-height:1.4rem;transition:opacity .5s}
+.breath-stop{color:var(--t3);font-size:.87rem;padding:12px 24px;background:var(--bg-2);border-radius:var(--rf)}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:300;display:flex;align-items:flex-end;opacity:0;visibility:hidden;transition:all var(--t)}
+.modal-backdrop.open{opacity:1;visibility:visible}
+.modal{width:100%;background:var(--bg-2);border-radius:var(--r4) var(--r4) 0 0;padding:8px 0 env(safe-area-inset-bottom);max-height:92dvh;overflow-y:auto;transform:translateY(100%);transition:transform var(--sp)}
+.modal-backdrop.open .modal{transform:translateY(0)}
+.modal-handle{width:38px;height:4px;background:var(--bdr);border-radius:var(--rf);margin:10px auto 0}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--bdr)}
+.modal-title{font-size:1.05rem;font-weight:600}
+.modal-close-btn{color:var(--t2);font-size:1.1rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg-3)}
+.modal-body{padding:20px}
+
+/* Pages */
+.page{min-height:calc(100dvh - var(--nav-h));animation:fsin .28s ease}
+@keyframes fsin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Page Header */
+.page-header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr-s);z-index:50}
+.page-title{font-size:1.05rem;font-weight:600}
+.header-icon-btn{width:34px;height:34px;border-radius:50%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--t2)}
+
+/* Dashboard */
+.dash-hero{padding:26px 20px 16px}
+.dash-greeting{font-size:.8rem;color:var(--t2);margin-bottom:4px;letter-spacing:.03em}
+.dash-name{font-family:var(--fd);font-size:2.1rem;color:var(--t1);line-height:1.1}
+.dash-name em{font-style:normal;color:var(--gold-t)}
+.dash-date{font-size:.76rem;color:var(--t3);margin-top:5px}
+.dash-since{font-size:.76rem;color:var(--t3);margin-top:3px}
+.since-val{color:var(--green);font-weight:600}
+
+/* Mood Checkin */
+.mood-checkin{margin:0 16px 14px;background:var(--bg-2);border-radius:var(--r3);padding:16px;border:1px solid var(--bdr)}
+.section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:12px;font-weight:600}
+.mood-btns{display:flex;gap:7px}
+.mood-btn{flex:1;aspect-ratio:1;border-radius:var(--r2);background:var(--bg-3);border:1.5px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all var(--t);font-size:1.25rem}
+.mood-btn .mood-word{font-size:.44rem;color:var(--t3);font-weight:500;letter-spacing:.02em}
+.mood-btn.sel{border-color:var(--gold);background:var(--gold-d)}
+.mood-btn:active{transform:scale(.93)}
+
+/* AI Insight Card */
+.insight-card{margin:0 16px 14px;background:linear-gradient(135deg,var(--bg-2) 0%,rgba(30,48,44,.92) 100%);border-radius:var(--r3);padding:18px;border:1px solid rgba(232,168,50,.18);position:relative;overflow:hidden}
+.insight-card::before{content:'';position:absolute;top:-28px;right:-28px;width:90px;height:90px;border-radius:50%;background:var(--gold-d);filter:blur(20px)}
+.insight-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.insight-icon{font-size:1rem}
+.insight-lbl{font-size:.7rem;color:var(--gold-t);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.insight-txt{font-size:.88rem;color:var(--t1);line-height:1.75;position:relative;z-index:1}
+.insight-txt.loading{color:var(--t3);font-style:italic}
+.insight-refresh{font-size:.7rem;color:var(--t3);margin-top:10px;display:block}
+
+/* Quick Stats */
+.quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 16px 14px}
+.stat-card{background:var(--bg-2);border-radius:var(--r2);padding:14px 10px;text-align:center;border:1px solid var(--bdr)}
+.stat-val{font-family:var(--fd);font-size:1.5rem;color:var(--gold-t);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:.58rem;color:var(--t3);font-weight:500;letter-spacing:.02em;line-height:1.4}
+
+/* Section headers */
+.section-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:10px}
+.section-hdr-txt{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);font-weight:600}
+.section-hdr-link{font-size:.72rem;color:var(--gold)}
+
+/* Entry Cards */
+.entry-list{padding:0 16px;display:flex;flex-direction:column;gap:9px}
+.entry-card{background:var(--bg-2);border-radius:var(--r3);border:1px solid var(--bdr);padding:14px;display:flex;gap:12px;align-items:flex-start;transition:all var(--t)}
+.entry-card:active{background:var(--bg-3)}
+.entry-bar{width:3px;border-radius:2px;align-self:stretch;flex-shrink:0;min-height:36px}
+.entry-bar.checkin{background:var(--blue)}
+.entry-bar.relapse{background:var(--red)}
+.entry-bar.win{background:var(--green)}
+.entry-content{flex:1;min-width:0}
+.entry-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.entry-type{font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.entry-type.checkin{color:var(--blue)}
+.entry-type.relapse{color:var(--red)}
+.entry-type.win{color:var(--green)}
+.entry-date{font-size:.66rem;color:var(--t3)}
+.entry-desc{font-size:.83rem;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}
+.entry-mood{display:flex;gap:2px;align-items:center}
+.mood-pip{width:5px;height:5px;border-radius:50%;background:var(--bg-3)}
+.mood-pip.on{background:var(--gold)}
+.entry-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
+.etag{font-size:.6rem;padding:1px 7px;background:var(--bg-3);border-radius:var(--rf);color:var(--t2)}
+
+/* Journal FAB */
+.jfab{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 80px);left:18px;height:50px;padding:0 18px;background:var(--gold);color:#09100f;border-radius:var(--rf);font-weight:700;font-size:.86rem;box-shadow:var(--sh-gold);display:flex;align-items:center;gap:7px;z-index:150;transition:all var(--t)}
+.jfab:active{transform:scale(.95)}
+
+/* Forms */
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:.77rem;color:var(--t2);margin-bottom:7px;font-weight:500}
+.form-input,.form-textarea,.form-select{width:100%;background:var(--bg-3);border:1.5px solid var(--bdr);border-radius:var(--r2);color:var(--t1);padding:11px 15px;font-size:.91rem;outline:none;transition:border-color var(--t);resize:none;appearance:none}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--gold)}
+.form-textarea{min-height:85px;line-height:1.6}
+.form-hint{font-size:.7rem;color:var(--t3);margin-top:4px}
+
+/* Type Selector */
+.type-sel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tsel-btn{padding:12px 6px;border-radius:var(--r2);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.74rem;font-weight:500;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all var(--t)}
+.tsel-emoji{font-size:1.2rem}
+.tsel-btn.sel.checkin{border-color:var(--blue);background:var(--blue-d);color:var(--blue)}
+.tsel-btn.sel.relapse{border-color:var(--red);background:var(--red-d);color:var(--red)}
+.tsel-btn.sel.win{border-color:var(--green);background:var(--green-d);color:var(--green)}
+
+/* Mood Scale */
+.mood-scale{display:flex;gap:7px}
+.ms-btn{flex:1;aspect-ratio:1;border-radius:var(--r1);background:var(--bg-3);font-size:1.2rem;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;transition:all var(--t)}
+.ms-btn.sel{border-color:var(--gold);background:var(--gold-d);transform:scale(1.08)}
+
+/* Trigger Tags */
+.trig-tags{display:flex;flex-wrap:wrap;gap:7px}
+.ttag{padding:6px 13px;border-radius:var(--rf);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.77rem;transition:all var(--t)}
+.ttag.sel{background:var(--gold-d);border-color:var(--gold);color:var(--gold-t)}
+
+/* Duration */
+.dur-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.dur-btn{padding:8px 4px;border-radius:var(--r1);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.7rem;font-weight:500;text-align:center;transition:all var(--t)}
+.dur-btn.sel{border-color:var(--red);background:var(--red-d);color:var(--red)}
+
+/* Relapse extra */
+.relapse-extra{display:none}
+.relapse-extra.vis{display:block}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:var(--rf);font-size:.87rem;font-weight:600;transition:all var(--t)}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:var(--gold);color:#09100f;box-shadow:var(--sh-gold)}
+.btn-sec{background:var(--bg-3);color:var(--t1);border:1px solid var(--bdr)}
+.btn-dng{background:var(--red-d);color:var(--red);border:1px solid rgba(224,84,84,.3)}
+.btn-ghost{color:var(--t2)}
+.btn-full{width:100%}
+
+/* Insights */
+.chart-card{margin:0 16px 14px;background:var(--bg-2);border-radius:var(--r3);padding:18px;border:1px solid var(--bdr)}
+.chart-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);font-weight:600;margin-bottom:14px}
+.bar-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.bar-lbl{font-size:.7rem;color:var(--t2);width:65px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:var(--bg-3);border-radius:var(--rf);overflow:hidden}
+.bar-fill{height:100%;border-radius:var(--rf);background:var(--gold);transition:width 1s cubic-bezier(.4,0,.2,1);width:0}
+.bar-count{font-size:.7rem;color:var(--t3);width:18px;text-align:left;flex-shrink:0}
+.ins-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 16px 14px}
+.isc{background:var(--bg-2);border-radius:var(--r3);padding:16px;border:1px solid var(--bdr)}
+.isc-val{font-family:var(--fd);font-size:1.7rem;line-height:1;margin-bottom:3px;color:var(--gold-t)}
+.isc-lbl{font-size:.63rem;color:var(--t3);font-weight:500;letter-spacing:.03em;line-height:1.3}
+.isc-sub{font-size:.68rem;color:var(--t3);margin-top:5px}
+
+/* Mood SVG Chart */
+.mood-chart-wrap{position:relative;width:100%;height:110px}
+.mood-chart-svg{width:100%;height:100%;overflow:visible}
+
+/* Hour heatmap */
+.hour-hm{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.hcell{aspect-ratio:1;border-radius:3px;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:.38rem;color:var(--t3)}
+.hcell[data-l="1"]{background:rgba(232,168,50,.22)}
+.hcell[data-l="2"]{background:rgba(232,168,50,.5)}
+.hcell[data-l="3"]{background:rgba(224,84,84,.7)}
+.hlabel-row{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:4px}
+.hlabel{font-size:.46rem;color:var(--t3);text-align:center}
+
+/* Analysis */
+.analysis-card{margin:0 16px 14px;background:linear-gradient(135deg,var(--bg-2),rgba(30,48,44,.92));border-radius:var(--r3);padding:18px;border:1px solid rgba(78,203,138,.15)}
+.analysis-txt{font-size:.86rem;color:var(--t1);line-height:1.82;white-space:pre-wrap}
+.analysis-loading{color:var(--t3);font-style:italic;font-size:.86rem}
+
+/* Toolbox */
+.tb-section{padding:0 16px;margin-bottom:22px}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.tool-card{background:var(--bg-2);border-radius:var(--r3);padding:18px 14px;border:1px solid var(--bdr);display:flex;flex-direction:column;gap:8px;transition:all var(--t)}
+.tool-card:active{transform:scale(.97);background:var(--bg-3)}
+.tc-icon{font-size:1.55rem}
+.tc-name{font-size:.87rem;font-weight:600;color:var(--t1);line-height:1.2}
+.tc-desc{font-size:.7rem;color:var(--t2);line-height:1.4}
+.tech-card{background:var(--bg-2);border-radius:var(--r3);border:1px solid var(--bdr);overflow:hidden;margin-bottom:9px}
+.tech-hdr{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tech-hdr-left{display:flex;align-items:center;gap:10px}
+.tech-icon{font-size:1.15rem}
+.tech-title{font-size:.87rem;font-weight:600;color:var(--t1)}
+.tech-arrow{color:var(--t3);font-size:.8rem;transition:transform var(--t)}
+.tech-card.open .tech-arrow{transform:rotate(180deg)}
+.tech-body{display:none;padding:0 18px 16px}
+.tech-card.open .tech-body{display:block}
+.tech-step{display:flex;gap:10px;margin-bottom:9px;font-size:.82rem;color:var(--t2);line-height:1.55}
+.step-n{width:20px;height:20px;border-radius:50%;background:var(--gold-d);color:var(--gold-t);font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.contacts-list{display:flex;flex-direction:column;gap:8px}
+.contact-card{background:var(--bg-2);border-radius:var(--r2);border:1px solid var(--bdr);padding:14px;display:flex;align-items:center;gap:12px}
+.contact-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold-d);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-name{font-size:.88rem;font-weight:500;color:var(--t1)}
+.contact-phone{font-size:.75rem;color:var(--t3);direction:ltr}
+.contact-call{margin-right:auto;color:var(--green);font-size:1.2rem}
+
+/* Chat */
+.chat-msgs{padding:16px;display:flex;flex-direction:column;gap:11px;padding-bottom:86px}
+.chat-bubble{max-width:84%;padding:12px 15px;font-size:.86rem;line-height:1.65;animation:bbl .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes bbl{from{opacity:0;transform:scale(.91) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.chat-bubble.ai{background:var(--bg-2);border:1px solid var(--bdr);border-radius:17px 17px 4px 17px;align-self:flex-end;color:var(--t1)}
+.chat-bubble.user{background:var(--gold-d);border:1px solid rgba(232,168,50,.25);border-radius:17px 17px 17px 4px;align-self:flex-start;color:var(--t1)}
+.chat-bubble.typing{display:flex;gap:5px;padding:15px 18px;align-self:flex-end}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--t3);animation:tdot 1.2s infinite}
+.tdot:nth-child(2){animation-delay:.2s}
+.tdot:nth-child(3){animation-delay:.4s}
+@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.chat-input-bar{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));left:0;right:0;padding:9px 14px;background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bdr);display:flex;gap:9px;align-items:flex-end;z-index:100}
+.chat-input{flex:1;background:var(--bg-3);border:1.5px solid var(--bdr);border-radius:19px;color:var(--t1);padding:10px 15px;font-size:.87rem;outline:none;resize:none;max-height:110px;overflow-y:auto;line-height:1.5;transition:border-color var(--t)}
+.chat-input:focus{border-color:var(--gold)}
+.chat-send{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#09100f;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--t)}
+.chat-send:disabled{background:var(--bg-3);color:var(--t3)}
+.chat-send:active:not(:disabled){transform:scale(.91)}
+.chat-day{font-size:.63rem;color:var(--t3);text-align:center;padding:4px 0}
+
+/* Profile */
+.prof-hdr{padding:26px 20px 14px;text-align:center}
+.prof-avatar{width:70px;height:70px;border-radius:50%;background:var(--gold-d);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 10px}
+.prof-dname{font-family:var(--fd);font-size:1.4rem;margin-bottom:3px}
+.prof-since{font-size:.73rem;color:var(--t3)}
+.prof-section{padding:0 16px;margin-bottom:22px}
+.srow{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r2);padding:13px 15px;display:flex;align-items:center;gap:11px;margin-bottom:7px;transition:all var(--t)}
+.srow:active{background:var(--bg-3)}
+.srow-icon{font-size:.95rem;width:20px;text-align:center}
+.srow-content{flex:1}
+.srow-label{font-size:.86rem;font-weight:500;color:var(--t1)}
+.srow-val{font-size:.7rem;color:var(--t3);margin-top:1px;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow-arrow{color:var(--t3);font-size:.78rem}
+
+/* Onboarding */
+.ob-screen{min-height:100dvh;display:flex;flex-direction:column;padding:52px 24px 40px;background:var(--bg-0)}
+.ob-step{display:none;flex:1;flex-direction:column;animation:fsin .38s ease}
+.ob-step.active{display:flex}
+.ob-icon{font-size:3.5rem;margin-bottom:22px}
+.ob-title{font-family:var(--fd);font-size:1.9rem;color:var(--t1);margin-bottom:10px;line-height:1.2}
+.ob-title em{font-style:normal;color:var(--gold-t)}
+.ob-desc{font-size:.92rem;color:var(--t2);line-height:1.82;margin-bottom:26px}
+.ob-form{flex:1;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
+.ob-footer{margin-top:auto;padding-top:18px}
+.ob-progress{display:flex;gap:6px;justify-content:center;margin-bottom:18px}
+.pdot{width:6px;height:6px;border-radius:50%;background:var(--bg-3);transition:all var(--t)}
+.pdot.active{background:var(--gold);width:18px;border-radius:3px}
+
+/* Tags Input widget */
+.tags-widget{}
+.tags-display{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px}
+.tw-tag{display:flex;align-items:center;gap:5px;padding:4px 10px;background:var(--bg-3);border:1px solid var(--bdr);border-radius:var(--rf);font-size:.77rem;color:var(--t1)}
+.tw-rem{color:var(--t3);font-size:.9rem;line-height:1}
+.tw-input-row{display:flex;gap:7px}
+
+/* Empty state */
+.empty-state{text-align:center;padding:56px 28px}
+.es-icon{font-size:2.8rem;margin-bottom:14px}
+.es-title{font-family:var(--fd);font-size:1.15rem;color:var(--t1);margin-bottom:7px}
+.es-desc{font-size:.84rem;color:var(--t2);line-height:1.65;margin-bottom:22px}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--bg-3);border:1px solid var(--bdr);border-radius:var(--rf);padding:9px 18px;font-size:.82rem;color:var(--t1);z-index:900;transition:transform var(--sp);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:rgba(78,203,138,.4);color:var(--green)}
+.toast.err{border-color:rgba(224,84,84,.4);color:var(--red)}
+
+/* Confirm dialog */
+.confirm-dlg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:700;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:all var(--t)}
+.confirm-dlg.open{opacity:1;visibility:visible}
+.confirm-box{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r4);padding:28px 24px;width:100%;max-width:320px;text-align:center}
+.confirm-title{font-size:1.1rem;font-weight:600;margin-bottom:8px}
+.confirm-desc{font-size:.87rem;color:var(--t2);line-height:1.6;margin-bottom:22px}
+.confirm-actions{display:flex;gap:10px}
+
+/* Helpers */
+.hidden{display:none!important}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+.divider{height:1px;background:var(--bdr);margin:14px 0}
+.spacer{height:24px}
+*::-webkit-scrollbar{display:none}
+  </style>
+</head>
+<body>
+
+<!-- ── Loading Screen ─────────────────────── -->
+<div id="loading-screen">
+  <div class="loading-logo">FreeMe</div>
+  <div class="loading-sub">מסע שיפור עצמי</div>
+  <div class="loading-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- ── Onboarding ─────────────────────────── -->
+<div id="onboarding-screen" style="display:none" class="ob-screen">
+
+  <!-- Step 0: Welcome & Name -->
+  <div class="ob-step active">
+    <div class="ob-icon">🌱</div>
+    <div class="ob-title">ברוך הבא ל<em>FreeMe</em></div>
+    <div class="ob-desc">זה המרחב שלך — בלי שיפוט, בלי ספירה של ימים, רק צמיחה אמיתית. נתחיל בכמה שאלות קצרות כדי שנוכל להתאים הכל עבורך.</div>
+    <div class="ob-form">
+      <div class="form-group">
+        <div class="form-label">איך לפנות אליך?</div>
+        <input class="form-input" id="ob-name" placeholder="השם שלך (אפשר כינוי)" autofocus>
+      </div>
+    </div>
+    <div class="ob-footer">
+      <div class="ob-progress">
+        <div class="pdot active"></div><div class="pdot"></div><div class="pdot"></div><div class="pdot"></div>
+      </div>
+      <button class="btn btn-pri btn-full" onclick="App.nextOBStep()">הבא →</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Why -->
+  <div class="ob-step">
+    <div class="ob-icon">💡</div>
+    <div class="ob-title">למה <em>אתה</em> עושה את זה?</div>
+    <div class="ob-desc">הסיבה האמיתית שלך. לא מה שמצפים ממך לכתוב — אלא מה שבאמת מניע אותך לשינוי. ה-AI שלך ישתמש בזה כדי לתמוך בך.</div>
+    <div class="ob-form">
+      <textarea class="form-textarea" id="ob-why" placeholder="לדוגמה: אני רוצה להרגיש שאני שולט בחיי. אני רוצה מערכות יחסים אמיתיות. אני רוצה להיות הגרסה הטובה ביותר שלי..." style="min-height:140px"></textarea>
+    </div>
+    <div class="ob-footer">
+      <div class="ob-progress">
+        <div class="pdot"></div><div class="pdot active"></div><div class="pdot"></div><div class="pdot"></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-sec" onclick="App.prevOBStep()">← חזור</button>
+        <button class="btn btn-pri" style="flex:1" onclick="App.nextOBStep()">הבא →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Triggers -->
+  <div class="ob-step">
+    <div class="ob-icon">⚡</div>
+    <div class="ob-title">מה <em>מפעיל</em> אותך?</div>
+    <div class="ob-desc">בחר את הטריגרים שמובילים אותך לשימוש. ככל שתהיה כנה יותר, ה-AI יוכל לעזור לך טוב יותר.</div>
+    <div class="ob-form">
+      <div class="trig-tags" id="ob-triggers">
+        <button class="ttag ob-trigger" data-t="בדידות" onclick="this.classList.toggle('sel')">בדידות</button>
+        <button class="ttag ob-trigger" data-t="שעמום" onclick="this.classList.toggle('sel')">שעמום</button>
+        <button class="ttag ob-trigger" data-t="לחץ" onclick="this.classList.toggle('sel')">לחץ</button>
+        <button class="ttag ob-trigger" data-t="עייפות" onclick="this.classList.toggle('sel')">עייפות</button>
+        <button class="ttag ob-trigger" data-t="חרדה" onclick="this.classList.toggle('sel')">חרדה</button>
+        <button class="ttag ob-trigger" data-t="כעס" onclick="this.classList.toggle('sel')">כעס</button>
+        <button class="ttag ob-trigger" data-t="עצב" onclick="this.classList.toggle('sel')">עצב</button>
+        <button class="ttag ob-trigger" data-t="תסכול" onclick="this.classList.toggle('sel')">תסכול</button>
+        <button class="ttag ob-trigger" data-t="זמן פנוי" onclick="this.classList.toggle('sel')">זמן פנוי</button>
+        <button class="ttag ob-trigger" data-t="לילה" onclick="this.classList.toggle('sel')">לילה</button>
+        <button class="ttag ob-trigger" data-t="סביבה מסוימת" onclick="this.classList.toggle('sel')">סביבה מסוימת</button>
+        <button class="ttag ob-trigger" data-t="מריבה" onclick="this.classList.toggle('sel')">מריבה</button>
+      </div>
+    </div>
+    <div class="ob-footer">
+      <div class="ob-progress">
+        <div class="pdot"></div><div class="pdot"></div><div class="pdot active"></div><div class="pdot"></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-sec" onclick="App.prevOBStep()">← חזור</button>
+        <button class="btn btn-pri" style="flex:1" onclick="App.nextOBStep()">הבא →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Strategies & API Key -->
+  <div class="ob-step">
+    <div class="ob-icon">🔑</div>
+    <div class="ob-title">מה <em>עוזר</em> לך?</div>
+    <div class="ob-desc">אסטרטגיות שעבדו עבורך בעבר, ו-API Key לחיבור ה-AI.</div>
+    <div class="ob-form">
+      <div class="form-group">
+        <div class="form-label">מה עזר לי בעבר (כל דבר בשורה נפרדת)</div>
+        <textarea class="form-textarea" id="ob-helps" placeholder="יציאה לריצה&#10;שיחה עם חבר&#10;מקלחת קרה&#10;מוזיקה חזקה"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Gemini API Key (ל-AI)</div>
+        <input class="form-input" id="ob-key" placeholder="AIzaSy..." dir="ltr" style="font-size:.82rem">
+        <div class="form-hint">כבר מוגדר ✓ — ניתן לשנות בהגדרות אחר כך</div>
+      </div>
+    </div>
+    <div class="ob-footer">
+      <div class="ob-progress">
+        <div class="pdot"></div><div class="pdot"></div><div class="pdot"></div><div class="pdot active"></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-sec" onclick="App.prevOBStep()">← חזור</button>
+        <button class="btn btn-pri" style="flex:1" onclick="App.nextOBStep()">🌱 מתחילים!</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Main App ────────────────────────────── -->
+<div id="app" style="display:none">
+
+  <!-- Content Area -->
+  <div id="main-content"></div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <button class="nav-item" data-page="dashboard" onclick="App.nav('dashboard')">
+      <span class="nav-icon">🏠</span><span class="nav-label">בית</span>
+    </button>
+    <button class="nav-item" data-page="journal" onclick="App.nav('journal')">
+      <span class="nav-icon">📓</span><span class="nav-label">יומן</span>
+    </button>
+    <!-- SOS FAB placeholder -->
+    <div style="flex:1"></div>
+    <button class="nav-item" data-page="insights" onclick="App.nav('insights')">
+      <span class="nav-icon">📊</span><span class="nav-label">תובנות</span>
+    </button>
+    <button class="nav-item" data-page="toolbox" onclick="App.nav('toolbox')">
+      <span class="nav-icon">🧰</span><span class="nav-label">כלים</span>
+    </button>
+    <button class="nav-item" data-page="chat" onclick="App.nav('chat')">
+      <span class="nav-icon">💬</span><span class="nav-label">AI</span>
+    </button>
+    <button class="nav-item" data-page="profile" onclick="App.nav('profile')">
+      <span class="nav-icon">👤</span><span class="nav-label">פרופיל</span>
+    </button>
+  </nav>
+
+  <!-- SOS Floating Button -->
+  <button class="sos-fab" onclick="App.showSOS()">SOS</button>
+
+  <!-- SOS Overlay -->
+  <div class="sos-overlay hidden" id="sos-overlay">
+    <div class="sos-pulse">🛑</div>
+    <div class="sos-title">אתה לא לבד</div>
+    <div class="sos-sub">בחר מה יעזור לך עכשיו</div>
+    <div class="sos-options">
+      <button class="sos-option" onclick="App.showBreathing()">
+        <span class="sos-opt-icon">🌬️</span>
+        <div>
+          <div class="sos-opt-title">תרגיל נשימה</div>
+          <div class="sos-opt-desc">4-7-8 — מרגיע את מערכת העצבים תוך 2 דקות</div>
+        </div>
+      </button>
+      <button class="sos-option" onclick="App.sosChatAI()">
+        <span class="sos-opt-icon">🤖</span>
+        <div>
+          <div class="sos-opt-title">דבר עם ה-AI עכשיו</div>
+          <div class="sos-opt-desc">קבל תמיכה ועזרה מיידית ומותאמת אישית</div>
+        </div>
+      </button>
+      <button class="sos-option" onclick="App.showEntryForm('relapse')">
+        <span class="sos-opt-icon">📝</span>
+        <div>
+          <div class="sos-opt-title">תעד מה קרה</div>
+          <div class="sos-opt-desc">כתיבה עוזרת לעבד ולהבין. בלי שיפוט.</div>
+        </div>
+      </button>
+      <button class="sos-option" onclick="App.nav('toolbox');App.hideSOS()">
+        <span class="sos-opt-icon">🧰</span>
+        <div>
+          <div class="sos-opt-title">ארגז כלים</div>
+          <div class="sos-opt-desc">טכניקות התמודדות וכלים מוכנים לשימוש</div>
+        </div>
+      </button>
+    </div>
+    <button class="sos-close-btn" onclick="App.hideSOS()">← חזור לאפליקציה</button>
+  </div>
+
+  <!-- Breathing Screen -->
+  <div class="breathing-screen" id="breathing-screen" style="display:none">
+    <div class="breath-label">נשימה מרגיעה 4-7-8</div>
+    <div class="breath-ring-wrap">
+      <div class="breath-ring"></div>
+      <div class="breath-circle">
+        <div class="breath-count" id="breath-count">4</div>
+        <div class="breath-phase-text" id="breath-phase">שאף</div>
+      </div>
+    </div>
+    <div class="breath-instruction" id="breath-instr">שאף לאט דרך האף...</div>
+    <button class="breath-stop" onclick="App.stopBreathing()">← סיים</button>
+  </div>
+
+  <!-- Entry Modal -->
+  <div class="modal-backdrop" id="entry-modal" onclick="event.target===this&&closeModal('entry-modal')">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <span class="modal-title">רשומה חדשה</span>
+        <button class="modal-close-btn" onclick="closeModal('entry-modal')">✕</button>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="confirm-dlg" id="confirm-dlg">
+    <div class="confirm-box">
+      <div class="confirm-title" id="confirm-title">האם אתה בטוח?</div>
+      <div class="confirm-desc" id="confirm-desc"></div>
+      <div class="confirm-actions">
+        <button class="btn btn-sec btn-full" id="confirm-cancel">ביטול</button>
+        <button class="btn btn-dng btn-full" id="confirm-ok">אישור</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+</div>
+
+<script>
+// FreeMe — Storage Layer
+const Storage = (() => {
+  const KEY = 'AIzaSyCTBUBep6mifoxAyb5OmyYSxuU9NC3MwZs';
+  const g = (k,d=null)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d}catch{return d}};
+  const s = (k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){console.error(e)}};
+  
+  return {
+    getProfile(){ return g('fm_profile',{name:'',why:'',triggers:[],helpingStrategies:[],notHelpingStrategies:[],emergencyContacts:[],geminiKey:KEY,onboardingDone:false,joinedAt:new Date().toISOString()}) },
+    setProfile(d){ s('fm_profile',d) },
+    updateProfile(p){ this.setProfile({...this.getProfile(),...p}) },
+    getApiKey(){ return this.getProfile().geminiKey||KEY },
+    
+    getEntries(){ return g('fm_entries',[]) },
+    addEntry(entry){
+      const entries=this.getEntries();
+      const ne={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),createdAt:new Date().toISOString(),...entry};
+      entries.unshift(ne); s('fm_entries',entries); return ne;
+    },
+    updateEntry(id,p){ const e=this.getEntries(); const i=e.findIndex(x=>x.id===id); if(i!==-1){e[i]={...e[i],...p}; s('fm_entries',e)} },
+    deleteEntry(id){ s('fm_entries',this.getEntries().filter(e=>e.id!==id)) },
+    getEntry(id){ return this.getEntries().find(e=>e.id===id)||null },
+    
+    getChatHistory(){ return g('fm_chat',[]) },
+    addChatMessage(role,content){
+      const h=this.getChatHistory();
+      h.push({role,content,ts:new Date().toISOString()});
+      if(h.length>80)h.splice(0,h.length-80);
+      s('fm_chat',h);
+    },
+    clearChatHistory(){ s('fm_chat',[]) },
+    
+    getRelapses(){ return this.getEntries().filter(e=>e.type==='relapse') },
+    getLastRelapse(){ const r=this.getRelapses(); return r.length?r[0]:null },
+    getDaysSince(){
+      const l=this.getLastRelapse();
+      if(!l)return null;
+      return Math.floor((Date.now()-new Date(l.createdAt))/86400000);
+    },
+    
+    getStats(){
+      const entries=this.getEntries();
+      const relapses=entries.filter(e=>e.type==='relapse');
+      const wins=entries.filter(e=>e.type==='win');
+      
+      const triggerCount={};
+      entries.forEach(e=>(e.triggers||[]).forEach(t=>{triggerCount[t]=(triggerCount[t]||0)+1}));
+      
+      const moodData=entries.filter(e=>e.mood).slice(0,30).reverse().map(e=>({date:e.createdAt,mood:e.mood,type:e.type}));
+      
+      const hourDist=new Array(24).fill(0);
+      relapses.forEach(r=>{hourDist[new Date(r.createdAt).getHours()]++});
+      
+      const relapseDates=relapses.map(r=>new Date(r.createdAt)).sort((a,b)=>a-b);
+      const freePeriods=[];
+      for(let i=1;i<relapseDates.length;i++){
+        freePeriods.push({start:relapseDates[i-1],end:relapseDates[i],days:Math.floor((relapseDates[i]-relapseDates[i-1])/86400000)});
+      }
+      const longestFree=freePeriods.length?Math.max(...freePeriods.map(p=>p.days)):this.getDaysSince()||0;
+      
+      return {totalEntries:entries.length,totalRelapses:relapses.length,totalWins:wins.length,daysSince:this.getDaysSince(),triggerCount,moodData,hourDist,freePeriods,longestFree};
+    }
+  };
+})();
+
+// FreeMe — Gemini AI Layer
+const Gemini = (() => {
+  const URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+  
+  function buildContext() {
+    const p = Storage.getProfile();
+    const stats = Storage.getStats();
+    const recent = Storage.getEntries().slice(0, 8);
+    return `אתה מאמן תמיכה אישי, אמפתי ולא שיפוטי, לאדם שמתמודד עם התמכרות לפורנוגרפיה.
+
+פילוסופיה: שיפור עצמי ולמידה מתמדת. ההתמודדות היא תהליך של צמיחה, לא מרוץ. אין "נפילה" — יש רגעים להתמודד ורגעים להתחזק.
+
+פרופיל:
+- שם: ${p.name||'לא צוין'}
+- למה עושה את זה: ${p.why||'לא צוין'}
+- טריגרים עיקריים: ${(p.triggers||[]).join(', ')||'לא צוין'}
+- מה עוזר: ${(p.helpingStrategies||[]).join(', ')||'לא צוין'}
+- מה לא עוזר: ${(p.notHelpingStrategies||[]).join(', ')||'לא צוין'}
+
+נתונים:
+- סה"כ רשומות: ${stats.totalEntries}
+- נפילות מתועדות: ${stats.totalRelapses}
+- ניצחונות: ${stats.totalWins}
+${stats.daysSince!==null?`- ימים מאז הפעם האחרונה: ${stats.daysSince}`:'- טרם תועדה נפילה'}
+
+אחרון:
+${recent.map(e=>`[${new Date(e.createdAt).toLocaleDateString('he-IL')}] ${e.type}, מצב רוח ${e.mood||'?'}/5, ${(e.triggers||[]).join(',')}, "${(e.description||'').slice(0,50)}"`).join('\n')}
+
+כללים: ענה בעברית. לא שיפוטי. פרקטי — הצע פעולה קונקרטית אחת. לא ארוך מדי. לא להזכיר ספירת ימים כמדד הצלחה.`;
+  }
+  
+  async function call(messages) {
+    const key = Storage.getApiKey();
+    const res = await fetch(`${URL}?key=${key}`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        contents: messages,
+        generationConfig: {maxOutputTokens: 700, temperature: 0.82}
+      })
+    });
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    const d = await res.json();
+    if (d.error) throw new Error(d.error.message);
+    return d.candidates?.[0]?.content?.parts?.[0]?.text || 'לא קיבלתי תגובה.';
+  }
+  
+  function wrap(ctx, history, userMsg) {
+    const msgs = [
+      {role:'user', parts:[{text: ctx}]},
+      {role:'model', parts:[{text:'מובן. אני כאן לתמוך בך ללא שיפוט.'}]},
+      ...history.slice(-14).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:m.content}]})),
+      {role:'user', parts:[{text:userMsg}]}
+    ];
+    return msgs;
+  }
+  
+  return {
+    async chat(userMsg, history=[]) {
+      return call(wrap(buildContext(), history, userMsg));
+    },
+    
+    async getDailyInsight() {
+      return call(wrap(buildContext(), [], 'תן לי תובנה קצרה ומחזקת לתחילת היום — שתי עד שלוש משפטים. משהו שיעזור לי להתמודד טוב יותר היום.'));
+    },
+    
+    async analyzePatterns() {
+      return call(wrap(buildContext(), [], 'בהתבסס על הרשומות שלי, מה הדפוסים שאתה רואה? מה הטריגרים הנפוצים, מתי הסיכון גבוה, ומה כדאי שאשים לב אליו? תן ניתוח מפורט ומועיל.'));
+    },
+    
+    async handleSOS(feeling) {
+      return call(wrap(buildContext(), [], `אני במצב קשה עכשיו. ${feeling?`אני מרגיש: ${feeling}.`:''} עזור לי לעבור את הרגע הזה. תן הדרכה מיידית, קצרה ומעשית — עד 3 משפטים.`));
+    },
+    
+    async reflectOnEntry(entry) {
+      return call(wrap(buildContext(), [], `זה עתה רשמתי ביומן — סוג: ${entry.type}, מצב רוח: ${entry.mood}/5, טריגרים: ${(entry.triggers||[]).join(', ')||'לא'}. ${entry.description||''}. תגיב בצורה קצרה ותומכת — עד 3 משפטים.`));
+    }
+  };
+})();
+
+// FreeMe — Page Renderers
+const Pages = (() => {
+  const moodEmoji = ['😔','😕','😐','🙂','😊'];
+  const moodWords = ['קשה מאוד','קשה','בסדר','טוב','מצוין'];
+  const TRIGGERS = ['בדידות','שעמום','לחץ','עייפות','חרדה','כעס','עצב','תסכול','זמן פנוי','לילה','עבודה','מריבה','אחר'];
+  const DURATIONS = ['דקות','~שעה','כמה שעות','לא יודע'];
+
+  function formatDate(iso) {
+    const d = new Date(iso), now = new Date();
+    const diff = Math.floor((now - d) / 60000);
+    if (diff < 60) return `לפני ${diff||1} דק׳`;
+    if (diff < 1440) return `לפני ${Math.floor(diff/60)} שע׳`;
+    if (diff < 2880) return 'אתמול';
+    return d.toLocaleDateString('he-IL',{day:'numeric',month:'short'});
+  }
+
+  function moodPips(n) {
+    return Array.from({length:5},(_,i)=>`<div class="mood-pip ${i<n?'on':''}"></div>`).join('');
+  }
+
+  function entryCard(e) {
+    const desc = e.description || (e.type==='relapse'?'נפילה מתועדת':e.type==='win'?'ניצחון':'צ׳ק-אין');
+    const tags = (e.triggers||[]).slice(0,3).map(t=>`<span class="etag">${t}</span>`).join('');
+    return `
+      <button class="entry-card" onclick="App.viewEntry('${e.id}')">
+        <div class="entry-bar ${e.type}"></div>
+        <div class="entry-content">
+          <div class="entry-hdr">
+            <span class="entry-type ${e.type}">${e.type==='checkin'?"צ׳ק-אין":e.type==='relapse'?'נפילה':'ניצחון'}</span>
+            <span class="entry-date">${formatDate(e.createdAt)}</span>
+          </div>
+          <div class="entry-desc">${desc}</div>
+          ${e.mood?`<div class="entry-mood">${moodPips(e.mood)}</div>`:''}
+          ${tags?`<div class="entry-tags">${tags}</div>`:''}
+        </div>
+      </button>`;
+  }
+
+  function moodChartSVG(moodData) {
+    if (!moodData||moodData.length<2) return `<div style="text-align:center;color:var(--t3);font-size:.8rem;padding:20px 0">צריך לפחות 2 רשומות עם מצב רוח</div>`;
+    const W=300,H=96,pl=6,pr=6,pt=6,pb=14;
+    const cw=W-pl-pr, ch=H-pt-pb, n=moodData.length;
+    const xs=moodData.map((_,i)=>pl+(i/(n-1))*cw);
+    const ys=moodData.map(d=>pt+ch-((d.mood-1)/4)*ch);
+    const path=xs.map((x,i)=>`${i===0?'M':'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+    const area=`${path} L${xs[n-1].toFixed(1)},${(H-pb).toFixed(1)} L${xs[0].toFixed(1)},${(H-pb).toFixed(1)} Z`;
+    const grids=[1,2,3,4,5].map(v=>{const y=pt+ch-((v-1)/4)*ch;return `<line x1="${pl}" y1="${y.toFixed(1)}" x2="${(W-pr).toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--bdr)" stroke-width="1"/>`;}).join('');
+    const circles=xs.map((x,i)=>{const c=moodData[i].type==='relapse'?'var(--red)':moodData[i].type==='win'?'var(--green)':'var(--blue)';return `<circle cx="${x.toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="${c}" stroke="var(--bg-2)" stroke-width="1.5"/>`;}).join('');
+    const labelIdxs=[0,Math.floor(n/2),n-1].filter((v,i,a)=>a.indexOf(v)===i);
+    const labels=labelIdxs.map(i=>`<text x="${xs[i].toFixed(1)}" y="${H}" text-anchor="middle" fill="var(--t3)" font-size="7.5">${new Date(moodData[i].date).toLocaleDateString('he-IL',{day:'numeric',month:'numeric'})}</text>`).join('');
+    return `<div class="mood-chart-wrap"><svg viewBox="0 0 ${W} ${H}" class="mood-chart-svg">
+      <defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--gold)" stop-opacity=".28"/><stop offset="100%" stop-color="var(--gold)" stop-opacity="0"/></linearGradient></defs>
+      ${grids}<path d="${area}" fill="url(#mg)"/>
+      <path d="${path}" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      ${circles}${labels}</svg></div>`;
+  }
+
+  // ── DASHBOARD ────────────────────────────
+  const dashboard = {
+    render() {
+      const p = Storage.getProfile();
+      const stats = Storage.getStats();
+      const entries = Storage.getEntries().slice(0,3);
+      const h = new Date().getHours();
+      const greet = h<5?'לילה טוב':h<12?'בוקר טוב':h<18?'צהריים טובים':'ערב טוב';
+      let sinceHtml='';
+      if (stats.daysSince!==null) {
+        const s=stats.daysSince;
+        sinceHtml=`<div class="dash-since">מאז הפעם האחרונה: <span class="since-val">${s===0?'היום':s===1?'אתמול':s+' ימים'}</span></div>`;
+      }
+      const recent = entries.length
+        ? entries.map(e=>entryCard(e)).join('')
+        : `<div class="empty-state" style="padding:28px 20px"><div class="es-icon">📓</div><div class="es-desc" style="margin-bottom:0">עדיין אין רשומות. רשום את הרשומה הראשונה שלך.</div></div>`;
+      return `
+        <div class="page" id="page-dashboard">
+          <div class="dash-hero">
+            <div class="dash-greeting">${greet},</div>
+            <div class="dash-name"><em>${p.name||'חבר'}</em></div>
+            <div class="dash-date">${new Date().toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})}</div>
+            ${sinceHtml}
+          </div>
+          <div class="mood-checkin">
+            <div class="section-label">איך אתה מרגיש עכשיו?</div>
+            <div class="mood-btns">
+              ${moodEmoji.map((e,i)=>`<button class="mood-btn" data-mood="${i+1}" onclick="Pages.dashboard.logMood(${i+1})"><span>${e}</span><span class="mood-word">${moodWords[i]}</span></button>`).join('')}
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-hdr"><span class="insight-icon">✨</span><span class="insight-lbl">תובנה יומית</span></div>
+            <div class="insight-txt loading" id="insight-txt">טוען תובנה...</div>
+            <button class="insight-refresh" onclick="Pages.dashboard.loadInsight()">↻ רענן</button>
+          </div>
+          <div class="quick-stats">
+            <div class="stat-card"><div class="stat-val">${stats.totalEntries}</div><div class="stat-lbl">רשומות</div></div>
+            <div class="stat-card"><div class="stat-val">${stats.totalWins}</div><div class="stat-lbl">ניצחונות</div></div>
+            <div class="stat-card"><div class="stat-val">${stats.longestFree||0}</div><div class="stat-lbl">רצף ארוך (ימים)</div></div>
+          </div>
+          <div class="section-hdr">
+            <span class="section-hdr-txt">רשומות אחרונות</span>
+            <button class="section-hdr-link" onclick="App.nav('journal')">הכל</button>
+          </div>
+          <div class="entry-list">${recent}</div>
+          <div class="spacer"></div>
+        </div>`;
+    },
+    afterRender() { this.loadInsight(); },
+    logMood(mood) {
+      document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('sel',parseInt(b.dataset.mood)===mood));
+      Storage.addEntry({type:'checkin',mood,description:`צ׳ק-אין מהיר — ${moodWords[mood-1]}`,triggers:[]});
+      App.toast(`${moodEmoji[mood-1]} נשמר`,'ok');
+    },
+    async loadInsight() {
+      const el=document.getElementById('insight-txt');
+      if(!el)return;
+      el.className='insight-txt loading'; el.textContent='טוען תובנה...';
+      try { const t=await Gemini.getDailyInsight(); el.className='insight-txt'; el.textContent=t; }
+      catch(e){ el.textContent='לא הצלחתי לטעון תובנה.'; }
+    }
+  };
+
+  // ── JOURNAL ──────────────────────────────
+  const journal = {
+    filter:'all',
+    render() {
+      const all=Storage.getEntries();
+      const filtered=this.filter==='all'?all:all.filter(e=>e.type===this.filter);
+      const filterBtns=[['all','הכל'],['checkin',"צ׳ק-אין"],['relapse','נפילות'],['win','ניצחונות']].map(([f,l])=>
+        `<button class="ttag ${this.filter===f?'sel':''}" onclick="Pages.journal.setFilter('${f}')">${l}</button>`).join('');
+      const list = filtered.length
+        ? filtered.map(e=>entryCard(e)).join('')
+        : `<div class="empty-state"><div class="es-icon">${this.filter==='all'?'📓':'🔍'}</div><div class="es-title">${this.filter==='all'?'עדיין ריק':'אין רשומות'}</div><div class="es-desc">${this.filter==='all'?'התחל לתעד את המסע שלך.':'אין רשומות מסוג זה.'}</div>${this.filter==='all'?`<button class="btn btn-pri" onclick="App.showEntryForm()">+ רשומה ראשונה</button>`:''}</div>`;
+      return `
+        <div class="page" id="page-journal">
+          <div class="page-header">
+            <span class="page-title">יומן</span>
+            <button class="header-icon-btn" onclick="App.showEntryForm()">＋</button>
+          </div>
+          <div style="padding:12px 16px 8px"><div class="trig-tags">${filterBtns}</div></div>
+          <div class="entry-list">${list}</div>
+          <div class="spacer"></div>
+        </div>
+        <button class="jfab" onclick="App.showEntryForm()">+ רשומה חדשה</button>`;
+    },
+    afterRender(){},
+    setFilter(f){this.filter=f;App.nav('journal');}
+  };
+
+  // ── INSIGHTS ─────────────────────────────
+  const insights = {
+    render() {
+      const s=Storage.getStats();
+      const {triggerCount,moodData,hourDist,totalEntries,totalRelapses,totalWins,longestFree,daysSince}=s;
+      if(!totalEntries) return `<div class="page"><div class="page-header"><span class="page-title">תובנות</span></div><div class="empty-state"><div class="es-icon">📊</div><div class="es-title">עדיין אין נתונים</div><div class="es-desc">התחל לרשום ביומן ותובנות יופיעו כאן.</div></div></div>`;
+      const ds=daysSince!==null?(daysSince===0?'היום':daysSince===1?'אתמול':daysSince+' ימים'):null;
+      const sorted=Object.entries(triggerCount).sort((a,b)=>b[1]-a[1]).slice(0,6);
+      const maxC=sorted[0]?.[1]||1;
+      const maxH=Math.max(...hourDist,1);
+      const hmCells=Array.from({length:24},(_,i)=>`<div class="hcell" data-l="${Math.ceil((hourDist[i]/maxH)*3)||0}" title="${i}:00">${i}</div>`).join('');
+      return `
+        <div class="page" id="page-insights">
+          <div class="page-header"><span class="page-title">תובנות</span></div>
+          <div class="ins-summary">
+            <div class="isc"><div class="isc-val" style="color:var(--t1)">${totalEntries}</div><div class="isc-lbl">רשומות ביומן</div></div>
+            <div class="isc"><div class="isc-val" style="color:var(--green)">${totalWins}</div><div class="isc-lbl">ניצחונות</div></div>
+            <div class="isc"><div class="isc-val" style="color:var(--red)">${totalRelapses}</div><div class="isc-lbl">נפילות</div></div>
+            <div class="isc"><div class="isc-val">${longestFree||0}</div><div class="isc-lbl">רצף נקי ארוך</div>${ds?`<div class="isc-sub">עכשיו: ${ds}</div>`:''}</div>
+          </div>
+          ${moodData.length>=2?`<div class="chart-card"><div class="chart-title">מגמת מצב רוח</div>${moodChartSVG(moodData)}<div style="display:flex;gap:10px;margin-top:10px;justify-content:flex-end"><span style="font-size:.62rem;color:var(--blue)">⬤ צ׳ק-אין</span><span style="font-size:.62rem;color:var(--green)">⬤ ניצחון</span><span style="font-size:.62rem;color:var(--red)">⬤ נפילה</span></div></div>`:''}
+          ${sorted.length?`<div class="chart-card"><div class="chart-title">טריגרים נפוצים</div>${sorted.map(([t,c])=>`<div class="bar-row"><div class="bar-lbl">${t}</div><div class="bar-track"><div class="bar-fill" style="width:${(c/maxC*100).toFixed(0)}%"></div></div><div class="bar-count">${c}</div></div>`).join('')}</div>`:''}
+          ${totalRelapses>0?`<div class="chart-card"><div class="chart-title">שעות סיכון — נפילות לפי שעה</div><div class="hour-hm" style="grid-template-columns:repeat(24,1fr)">${hmCells}</div><div style="display:flex;gap:6px;margin-top:8px;align-items:center"><span style="font-size:.6rem;color:var(--t3)">נמוך</span><div style="width:9px;height:9px;border-radius:2px;background:rgba(232,168,50,.22)"></div><div style="width:9px;height:9px;border-radius:2px;background:rgba(232,168,50,.5)"></div><div style="width:9px;height:9px;border-radius:2px;background:rgba(224,84,84,.7)"></div><span style="font-size:.6rem;color:var(--t3)">גבוה</span></div></div>`:''}
+          <div class="analysis-card">
+            <div class="insight-hdr"><span class="insight-icon">🧠</span><span class="insight-lbl">ניתוח AI</span></div>
+            <div id="analysis-txt" class="analysis-txt" style="color:var(--t3);font-style:italic">לחץ לניתוח דפוסים אישי...</div>
+            <button class="btn btn-sec btn-full mt8" id="analysis-btn" onclick="Pages.insights.loadAnalysis()">🔍 נתח את הדפוסים שלי</button>
+          </div>
+          <div class="spacer"></div>
+        </div>`;
+    },
+    afterRender(){
+      setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>b.style.width=w,60)}),100);
+    },
+    async loadAnalysis(){
+      const btn=document.getElementById('analysis-btn'),txt=document.getElementById('analysis-txt');
+      if(!btn||!txt)return;
+      btn.disabled=true;btn.textContent='מנתח...';
+      txt.textContent='מנתח דפוסים...';txt.style.color='var(--t3)';txt.style.fontStyle='italic';
+      try{const r=await Gemini.analyzePatterns();txt.textContent=r;txt.style.color='var(--t1)';txt.style.fontStyle='normal';btn.textContent='↻ נתח מחדש';btn.disabled=false;}
+      catch(e){txt.textContent='שגיאה. בדוק חיבור.';btn.disabled=false;btn.textContent='נסה שוב';}
+    }
+  };
+
+  // ── TOOLBOX ──────────────────────────────
+  const toolbox = {
+    render() {
+      const p=Storage.getProfile();
+      const contacts=p.emergencyContacts||[];
+      const techniques=[
+        {icon:'🌊',title:'גלישת דחף (Urge Surfing)',steps:['שים לב לדחף — אבל אל תפעל לפיו','דמיין שהדחף הוא גל שעולה ואז יורד','נשום עמוק. הגל יחלוף תוך 15–20 דקות','הישאר עם התחושה מבלי לפעול — אתה חזק ממנה']},
+        {icon:'🛑',title:'HALT — מה אני באמת צריך?',steps:['האם אני רעב? (Hungry) — אכול משהו','האם אני עייף? (Tired) — נוח','האם אני בודד? (Lonely) — התקשר למישהו','האם אני כועס? (Angry) — שחרר בבטחה']},
+        {icon:'⏱️',title:'כלל ה-15 דקות',steps:['אל תגיד "לא לעולם" — זה מתיש','אמור: "אחכה 15 דקות בלבד"','הסח את הדעת: מים, אוויר, תנועה','לרוב הדחף יחלוף. אם לא — עוד 15 דקות']},
+        {icon:'🖐️',title:'5-4-3-2-1 עיגון',steps:['ראה: 5 דברים סביבך','גע: 4 דברים שאתה יכול לגעת','שמע: 3 דברים שאתה שומע','הרח: 2 דברים שאתה מריח','טעם: 1 דבר שאתה יכול לטעום']},
+        {icon:'📍',title:'שנה מיקום מיידית',steps:['קום מהמקום שבו אתה — עכשיו','לך לחדר אחר, לחצר, לרחוב','שנה סביבה = שנה מצב מנטלי','שלח הודעה לחבר, בקש שיתקשר']},
+        {icon:'✍️',title:'כתוב לפני שאתה פועל',steps:['לפני כל דבר, פתח את היומן','כתוב: מה אתה מרגיש? מה גרם לזה?','מה יקרה אם תפעל? ואם לא?','לעתים קרובות הכתיבה עצמה מפיגה את הדחף']}
+      ];
+      return `
+        <div class="page" id="page-toolbox">
+          <div class="page-header"><span class="page-title">ארגז כלים</span></div>
+          <div class="tb-section" style="margin-top:16px">
+            <div class="section-label">פעולות מהירות</div>
+            <div class="tool-grid">
+              <button class="tool-card" onclick="App.showBreathing()"><div class="tc-icon">🌬️</div><div class="tc-name">תרגיל נשימה</div><div class="tc-desc">4-7-8 להרגעה מיידית</div></button>
+              <button class="tool-card" onclick="Pages.toolbox.grounding()"><div class="tc-icon">🖐️</div><div class="tc-name">עיגון חושים</div><div class="tc-desc">5-4-3-2-1 לחזרה להווה</div></button>
+              <button class="tool-card" onclick="App.showSOS()"><div class="tc-icon">🆘</div><div class="tc-name">SOS</div><div class="tc-desc">עזרה מיידית</div></button>
+              <button class="tool-card" onclick="App.nav('chat')"><div class="tc-icon">💬</div><div class="tc-name">שוחח עם AI</div><div class="tc-desc">מאמן אישי זמין תמיד</div></button>
+            </div>
+          </div>
+          <div class="tb-section">
+            <div class="section-label">טכניקות התמודדות</div>
+            ${techniques.map((t,i)=>`
+              <div class="tech-card" id="tc${i}">
+                <button class="tech-hdr" onclick="Pages.toolbox.toggle(${i})">
+                  <div class="tech-hdr-left"><span class="tech-icon">${t.icon}</span><span class="tech-title">${t.title}</span></div>
+                  <span class="tech-arrow">▼</span>
+                </button>
+                <div class="tech-body">
+                  ${t.steps.map((s,j)=>`<div class="tech-step"><div class="step-n">${j+1}</div><div>${s}</div></div>`).join('')}
+                </div>
+              </div>`).join('')}
+          </div>
+          <div class="tb-section">
+            <div class="section-label">אנשי קשר לחירום</div>
+            ${contacts.length?contacts.map(c=>`<div class="contact-card"><div class="contact-avatar">👤</div><div><div class="contact-name">${c.name}</div><div class="contact-phone" dir="ltr">${c.phone}</div></div><a href="tel:${c.phone}" class="contact-call">📞</a></div>`).join(''):`<div style="font-size:.85rem;color:var(--t3);text-align:center;padding:16px">הוסף אנשי קשר בפרופיל שלך</div>`}
+            <button class="btn btn-sec btn-full mt8" onclick="App.nav('profile')">✏️ ערוך אנשי קשר</button>
+          </div>
+          <div class="spacer"></div>
+        </div>`;
+    },
+    afterRender(){},
+    toggle(i){document.getElementById('tc'+i)?.classList.toggle('open');},
+    grounding(){
+      App.showModalSimple('עיגון 5-4-3-2-1',`
+        <p style="color:var(--t2);line-height:1.7;margin-bottom:14px">תרגיל זה מחזיר אותך להווה. עבור לאט על כל שלב:</p>
+        ${['👁️ ראה: 5 דברים שאתה רואה','✋ גע: 4 דברים שאתה יכול לגעת','👂 שמע: 3 דברים שאתה שומע','👃 הרח: 2 דברים שאתה מריח','👅 טעם: דבר אחד שאתה יכול לטעום'].map((s,i)=>`<div style="display:flex;gap:12px;margin-bottom:12px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;background:var(--gold-d);color:var(--gold-t);font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">${5-i}</div><div style="font-size:.87rem;color:var(--t1)">${s}</div></div>`).join('')}
+        <div style="background:var(--bg-3);border-radius:var(--r2);padding:12px;font-size:.82rem;color:var(--t2);line-height:1.65;margin-top:4px">קח זמן עם כל שלב. הנשימה היא המפתח. הדחף יחלוף.</div>
+        <button class="btn btn-pri btn-full mt8" onclick="closeModal('entry-modal')">סגור</button>
+      `);
+    }
+  };
+
+  // ── CHAT ─────────────────────────────────
+  const chat = {
+    render() {
+      const history=Storage.getChatHistory();
+      let msgs='';
+      if(!history.length){
+        msgs=`<div class="chat-bubble ai">שלום! אני כאן לעזור לך במסע שלך. ספר לי איך אתה מרגיש היום, שאל אותי שאלה, או פשוט דבר איתי. אני לא שופט — רק תומך. 💛</div>`;
+      } else {
+        let lastDay='';
+        msgs=history.map(m=>{
+          const d=new Date(m.ts),day=d.toLocaleDateString('he-IL');
+          const div=day!==lastDay?(lastDay=day,`<div class="chat-day">${day}</div>`):'';
+          return `${div}<div class="chat-bubble ${m.role==='user'?'user':'ai'}">${m.content.replace(/\n/g,'<br>')}</div>`;
+        }).join('');
+      }
+      return `
+        <div class="page" id="page-chat">
+          <div class="page-header">
+            <span class="page-title">💬 מאמן AI</span>
+            <button class="header-icon-btn" onclick="Pages.chat.clear()" title="נקה">🗑️</button>
+          </div>
+          <div class="chat-msgs" id="chat-msgs">${msgs}</div>
+        </div>
+        <div class="chat-input-bar">
+          <textarea class="chat-input" id="chat-input" placeholder="כתוב כאן..." rows="1" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,110)+'px';document.getElementById('chat-send').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Pages.chat.send()}"></textarea>
+          <button class="chat-send" id="chat-send" disabled onclick="Pages.chat.send()">➤</button>
+        </div>`;
+    },
+    afterRender(){const m=document.getElementById('chat-msgs');if(m)m.scrollTop=m.scrollHeight;},
+    async send(){
+      const inp=document.getElementById('chat-input'),btn=document.getElementById('chat-send'),msgs=document.getElementById('chat-msgs');
+      if(!inp||!msgs)return;
+      const text=inp.value.trim();if(!text)return;
+      inp.value='';inp.style.height='auto';if(btn)btn.disabled=true;
+      msgs.innerHTML+=`<div class="chat-bubble user">${text.replace(/\n/g,'<br>')}</div>`;
+      Storage.addChatMessage('user',text);
+      msgs.innerHTML+=`<div class="chat-bubble typing ai" id="typing-ind"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
+      msgs.scrollTop=msgs.scrollHeight;
+      try{
+        const history=Storage.getChatHistory().slice(-20);
+        const reply=await Gemini.chat(text,history.slice(0,-1));
+        document.getElementById('typing-ind')?.remove();
+        msgs.innerHTML+=`<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
+        Storage.addChatMessage('assistant',reply);
+      } catch(e){
+        document.getElementById('typing-ind')?.remove();
+        msgs.innerHTML+=`<div class="chat-bubble ai">שגיאה. בדוק חיבור לרשת.</div>`;
+      }
+      msgs.scrollTop=msgs.scrollHeight;if(btn)btn.disabled=false;
+    },
+    clear(){App.confirm('לנקות את השיחה?','ההיסטוריה תימחק',()=>{Storage.clearChatHistory();App.nav('chat');});}
+  };
+
+  // ── PROFILE ──────────────────────────────
+  const profile = {
+    render() {
+      const p=Storage.getProfile();
+      const joined=new Date(p.joinedAt||Date.now()).toLocaleDateString('he-IL',{year:'numeric',month:'long',day:'numeric'});
+      return `
+        <div class="page" id="page-profile">
+          <div class="page-header"><span class="page-title">פרופיל</span></div>
+          <div class="prof-hdr">
+            <div class="prof-avatar">🌱</div>
+            <div class="prof-dname">${p.name||'אנונימי'}</div>
+            <div class="prof-since">מ: ${joined}</div>
+          </div>
+          <div class="prof-section">
+            <div class="section-label">פרטים אישיים</div>
+            <button class="srow" onclick="App.editProfileField('name','שם','${(p.name||'').replace(/'/g,"\\'")}')">
+              <div class="srow-icon">👤</div><div class="srow-content"><div class="srow-label">שם</div><div class="srow-val">${p.name||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
+            </button>
+            <button class="srow" onclick="App.editWhy()">
+              <div class="srow-icon">💡</div><div class="srow-content"><div class="srow-label">למה אני עושה את זה</div><div class="srow-val">${(p.why||'').slice(0,40)||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
+            </button>
+          </div>
+          <div class="prof-section">
+            <div class="section-label">הטריגרים שלי</div>
+            <button class="srow" onclick="App.editTags('triggers','הטריגרים שלי')">
+              <div class="srow-icon">⚡</div><div class="srow-content"><div class="srow-label">טריגרים</div><div class="srow-val">${(p.triggers||[]).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div>
+            </button>
+          </div>
+          <div class="prof-section">
+            <div class="section-label">אסטרטגיות</div>
+            <button class="srow" onclick="App.editTags('helpingStrategies','מה עוזר לי')">
+              <div class="srow-icon">✅</div><div class="srow-content"><div class="srow-label">מה עוזר לי</div><div class="srow-val">${(p.helpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
+            </button>
+            <button class="srow" onclick="App.editTags('notHelpingStrategies','מה לא עוזר')">
+              <div class="srow-icon">❌</div><div class="srow-content"><div class="srow-label">מה לא עוזר</div><div class="srow-val">${(p.notHelpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
+            </button>
+          </div>
+          <div class="prof-section">
+            <div class="section-label">אנשי קשר לחירום</div>
+            <button class="srow" onclick="App.editContacts()">
+              <div class="srow-icon">📞</div><div class="srow-content"><div class="srow-label">אנשי קשר</div><div class="srow-val">${(p.emergencyContacts||[]).map(c=>c.name).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div>
+            </button>
+          </div>
+          <div class="prof-section">
+            <div class="section-label">AI וייצוא</div>
+            <button class="srow" onclick="App.editApiKey()">
+              <div class="srow-icon">🔑</div><div class="srow-content"><div class="srow-label">Gemini API Key</div><div class="srow-val">${p.geminiKey?'מוגדר ✓':'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
+            </button>
+            <button class="srow" onclick="App.exportData()">
+              <div class="srow-icon">📤</div><div class="srow-content"><div class="srow-label">ייצוא נתונים</div></div><div class="srow-arrow">›</div>
+            </button>
+          </div>
+          <div class="spacer"></div>
+        </div>`;
+    },
+    afterRender(){}
+  };
+
+  return {dashboard,journal,insights,toolbox,chat,profile,moodEmoji,moodWords,TRIGGERS,DURATIONS,entryCard,formatDate};
+})();
+
+// FreeMe — Main App Controller
+const App = (() => {
+  let currentPage = 'dashboard';
+  let breathingTimer = null;
+  let breathingPhase = 0;
+  let breathingCount = 0;
+
+  // ── Init ─────────────────────────────────
+  function init() {
+    const profile = Storage.getProfile();
+    if (!profile.onboardingDone) {
+      showOnboarding();
+    } else {
+      showApp();
+    }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    }
+  }
+
+  function showApp() {
+    document.getElementById('loading-screen').classList.add('hidden');
+    document.getElementById('app').style.display = '';
+    nav(currentPage);
+  }
+
+  // ── Navigation ───────────────────────────
+  function nav(page) {
+    currentPage = page;
+    const content = document.getElementById('main-content');
+    const pageMap = {
+      dashboard: Pages.dashboard,
+      journal:   Pages.journal,
+      insights:  Pages.insights,
+      toolbox:   Pages.toolbox,
+      chat:      Pages.chat,
+      profile:   Pages.profile
+    };
+
+    const renderer = pageMap[page];
+    if (!renderer) return;
+
+    content.innerHTML = renderer.render();
+    renderer.afterRender();
+
+    // Update nav
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.classList.toggle('active', el.dataset.page === page);
+    });
+
+    content.scrollTop = 0;
+  }
+
+  // ── SOS ──────────────────────────────────
+  function showSOS() {
+    document.getElementById('sos-overlay').classList.remove('hidden');
+  }
+
+  function hideSOS() {
+    document.getElementById('sos-overlay').classList.add('hidden');
+  }
+
+  // ── Breathing ────────────────────────────
+  function showBreathing() {
+    hideSOS();
+    document.getElementById('breathing-screen').style.display = 'flex';
+    startBreathingCycle();
+  }
+
+  function stopBreathing() {
+    document.getElementById('breathing-screen').style.display = 'none';
+    if (breathingTimer) { clearInterval(breathingTimer); breathingTimer = null; }
+    breathingPhase = 0; breathingCount = 0;
+  }
+
+  const BREATH_PHASES = [
+    { label: 'שאף', seconds: 4, instruction: 'שאף לאט דרך האף...' },
+    { label: 'החזק', seconds: 7, instruction: 'החזק את האוויר...' },
+    { label: 'נשוף', seconds: 8, instruction: 'נשוף לאט דרך הפה...' }
+  ];
+
+  function startBreathingCycle() {
+    breathingPhase = 0;
+    breathingCount = 0;
+    runBreathPhase();
+  }
+
+  function runBreathPhase() {
+    const phase = BREATH_PHASES[breathingPhase];
+    const countEl = document.getElementById('breath-count');
+    const phaseEl = document.getElementById('breath-phase');
+    const instrEl = document.getElementById('breath-instr');
+    if (!countEl) return;
+
+    phaseEl.textContent = phase.label;
+    instrEl.textContent = phase.instruction;
+    breathingCount = phase.seconds;
+    countEl.textContent = breathingCount;
+
+    if (breathingTimer) clearInterval(breathingTimer);
+    breathingTimer = setInterval(() => {
+      breathingCount--;
+      if (countEl) countEl.textContent = breathingCount;
+      if (breathingCount <= 0) {
+        clearInterval(breathingTimer);
+        breathingPhase = (breathingPhase + 1) % BREATH_PHASES.length;
+        setTimeout(runBreathPhase, 400);
+      }
+    }, 1000);
+  }
+
+  // ── Entry Form ───────────────────────────
+  function showEntryForm(prefillType) {
+    const modal = document.getElementById('entry-modal');
+    modal.querySelector('.modal-body').innerHTML = buildEntryForm(prefillType);
+    openModal('entry-modal');
+    if (prefillType) selectEntryType(prefillType);
+  }
+
+  function buildEntryForm(prefillType) {
+    const moods = Pages.moodEmoji;
+    const moodWords = Pages.moodWords;
+    return `
+      <div class="form-group">
+        <div class="form-label">סוג הרשומה</div>
+        <div class="type-sel">
+          <button class="tsel-btn ${prefillType==='checkin'?'sel checkin':''}" data-type="checkin" onclick="selectEntryType('checkin')">
+            <span class="tsel-emoji">📝</span><span>צ'ק-אין</span>
+          </button>
+          <button class="tsel-btn ${prefillType==='relapse'?'sel relapse':''}" data-type="relapse" onclick="selectEntryType('relapse')">
+            <span class="tsel-emoji">⚠️</span><span>נפילה</span>
+          </button>
+          <button class="tsel-btn ${prefillType==='win'?'sel win':''}" data-type="win" onclick="selectEntryType('win')">
+            <span class="tsel-emoji">🏆</span><span>ניצחון</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">מצב רוח עכשיו</div>
+        <div class="mood-scale" id="mood-scale">
+          ${moods.map((e,i)=>`<button class="ms-btn" data-mood="${i+1}" onclick="selectMood(${i+1})" title="${moodWords[i]}">${e}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">טריגרים — מה גרם לזה?</div>
+        <div class="trig-tags" id="trig-tags">
+          ${Pages.TRIGGERS.map(t=>`<button class="ttag" data-trigger="${t}" onclick="toggleTrigger('${t}')">${t}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="relapse-extra" id="relapse-extra">
+        <div class="form-group">
+          <div class="form-label">כמה זמן נמשך?</div>
+          <div class="dur-opts" id="dur-opts">
+            ${Pages.DURATIONS.map(d=>`<button class="dur-btn" data-dur="${d}" onclick="selectDuration('${d}')">${d}</button>`).join('')}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">מה יכול היה לעזור לי לעצור?</div>
+          <textarea class="form-textarea" id="what-couldve-helped" placeholder="חשוב על זה בכנות..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">תיאור חופשי</div>
+        <textarea class="form-textarea" id="entry-desc" placeholder="איך היה? מה קרה לפני? מה אתה מרגיש?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">מה עשיתי / אמרתי לעצמי</div>
+        <input class="form-input" id="entry-coping" placeholder="כלי התמודדות שהשתמשתי בו...">
+      </div>
+
+      <button class="btn btn-pri btn-full" onclick="App.saveEntry()">💾 שמור רשומה</button>
+      <div class="divider"></div>
+      <button class="btn btn-ghost btn-full" onclick="closeModal('entry-modal')">ביטול</button>
+    `;
+  }
+
+  function saveEntry() {
+    const typeBtn = document.querySelector('.tsel-btn.sel');
+    const moodBtn = document.querySelector('.ms-btn.sel');
+    const triggers = Array.from(document.querySelectorAll('.ttag.sel')).map(b=>b.dataset.trigger);
+    const durBtn = document.querySelector('.dur-btn.sel');
+
+    if (!typeBtn) { toast('בחר סוג רשומה', 'err'); return; }
+
+    const entry = {
+      type: typeBtn.dataset.type,
+      mood: moodBtn ? parseInt(moodBtn.dataset.mood) : null,
+      triggers,
+      description: document.getElementById('entry-desc')?.value.trim() || '',
+      copingUsed: document.getElementById('entry-coping')?.value.trim() || '',
+    };
+
+    if (entry.type === 'relapse') {
+      entry.relapseDuration = durBtn?.dataset.dur || '';
+      entry.whatCouldHelp = document.getElementById('what-couldve-helped')?.value.trim() || '';
+    }
+
+    const saved = Storage.addEntry(entry);
+    closeModal('entry-modal');
+    toast('רשומה נשמרה ✓', 'ok');
+    nav(currentPage);
+
+    // Get AI reflection async
+    Gemini.reflectOnEntry(entry).then(reply => {
+      if (reply) toast('💬 AI: ' + reply.slice(0,60) + '...', 'ok');
+    }).catch(()=>{});
+  }
+
+  // ── View Entry ────────────────────────────
+  function viewEntry(id) {
+    const entry = Storage.getEntry(id);
+    if (!entry) return;
+    const typeLabel = {checkin:"צ'ק-אין", relapse:'נפילה', win:'ניצחון'}[entry.type];
+    const typeColor = {checkin:'var(--blue)', relapse:'var(--red)', win:'var(--green)'}[entry.type];
+    const mood = entry.mood ? Pages.moodEmoji[entry.mood-1] + ' ' + Pages.moodWords[entry.mood-1] : '—';
+    const triggers = (entry.triggers||[]).join(', ') || '—';
+
+    const body = `
+      <div style="margin-bottom:16px">
+        <span style="font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:${typeColor}">${typeLabel}</span>
+        <div style="font-size:.78rem;color:var(--t3);margin-top:3px">${new Date(entry.createdAt).toLocaleString('he-IL')}</div>
+      </div>
+      ${entry.description?`<div style="font-size:.9rem;color:var(--t1);line-height:1.7;margin-bottom:16px">${entry.description}</div>`:'' }
+      <div class="divider"></div>
+      <div style="display:grid;gap:10px;margin-bottom:16px">
+        <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מצב רוח</div><div style="font-size:.9rem">${mood}</div></div>
+        <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">טריגרים</div><div style="font-size:.9rem;color:var(--t1)">${triggers}</div></div>
+        ${entry.copingUsed?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">כלי התמודדות</div><div style="font-size:.9rem;color:var(--t1)">${entry.copingUsed}</div></div>`:''}
+        ${entry.type==='relapse'&&entry.relapseDuration?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">משך</div><div style="font-size:.9rem;color:var(--t1)">${entry.relapseDuration}</div></div>`:''}
+        ${entry.whatCouldHelp?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מה יכול היה לעזור</div><div style="font-size:.9rem;color:var(--t1)">${entry.whatCouldHelp}</div></div>`:''}
+      </div>
+      <button class="btn btn-dng btn-full" onclick="App.deleteEntry('${id}')">🗑️ מחק רשומה</button>
+    `;
+
+    const modal = document.getElementById('entry-modal');
+    modal.querySelector('.modal-title').textContent = typeLabel;
+    modal.querySelector('.modal-body').innerHTML = body;
+    openModal('entry-modal');
+  }
+
+  function deleteEntry(id) {
+    confirm('למחוק את הרשומה?', 'פעולה זו אינה ניתנת לביטול', () => {
+      Storage.deleteEntry(id);
+      closeModal('entry-modal');
+      toast('נמחק', 'ok');
+      nav(currentPage);
+    });
+  }
+
+  // ── SOS Chat ─────────────────────────────
+  async function sosChatAI() {
+    hideSOS();
+    nav('chat');
+    setTimeout(async () => {
+      const feeling = document.querySelector('#sos-feeling')?.value || '';
+      const msgs = document.getElementById('chat-msgs');
+      if (!msgs) return;
+      msgs.innerHTML += `<div class="chat-bubble user">אני במצב קשה עכשיו ומצטרך עזרה.</div>`;
+      msgs.innerHTML += `<div class="chat-bubble typing ai" id="typing-sos"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
+      msgs.scrollTop = msgs.scrollHeight;
+      try {
+        const reply = await Gemini.handleSOS(feeling);
+        document.getElementById('typing-sos')?.remove();
+        msgs.innerHTML += `<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
+        Storage.addChatMessage('assistant', reply);
+        msgs.scrollTop = msgs.scrollHeight;
+      } catch(e) {
+        document.getElementById('typing-sos')?.remove();
+      }
+    }, 300);
+  }
+
+  // ── Modals ───────────────────────────────
+  function openModal(id) {
+    document.getElementById(id)?.classList.add('open');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id)?.classList.remove('open');
+  }
+
+  function showModalSimple(title, bodyHtml) {
+    const m = document.getElementById('entry-modal');
+    m.querySelector('.modal-title').textContent = title;
+    m.querySelector('.modal-body').innerHTML = bodyHtml;
+    openModal('entry-modal');
+  }
+
+  // ── Profile Editing ───────────────────────
+  function editProfileField(field, label, current) {
+    showModalSimple(`ערוך: ${label}`, `
+      <div class="form-group">
+        <div class="form-label">${label}</div>
+        <input class="form-input" id="pf-input" value="${current||''}" placeholder="${label}">
+      </div>
+      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('${field}',document.getElementById('pf-input').value)">שמור</button>
+    `);
+    setTimeout(() => document.getElementById('pf-input')?.focus(), 200);
+  }
+
+  function saveProfileField(field, value) {
+    Storage.updateProfile({ [field]: value.trim() });
+    closeModal('entry-modal');
+    toast('נשמר ✓', 'ok');
+    nav('profile');
+  }
+
+  function editWhy() {
+    const p = Storage.getProfile();
+    showModalSimple('למה אני עושה את זה', `
+      <div class="form-group">
+        <div class="form-label">הסיבה האמיתית שלי</div>
+        <textarea class="form-textarea" id="why-input" placeholder="מה מוביל אותי לשינוי? מה אני רוצה להרוויח מזה?">${p.why||''}</textarea>
+        <div class="form-hint">זה יוצג ל-AI כדי לתמוך בך טוב יותר</div>
+      </div>
+      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('why',document.getElementById('why-input').value)">שמור</button>
+    `);
+    setTimeout(() => document.getElementById('why-input')?.focus(), 200);
+  }
+
+  function editTags(field, label) {
+    const p = Storage.getProfile();
+    const current = p[field] || [];
+    const renderTags = () => current.map((t,i) => `
+      <div class="tw-tag">
+        <span>${t}</span>
+        <button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button>
+      </div>`).join('');
+
+    showModalSimple(label, `
+      <div class="form-group">
+        <div class="tags-display" id="tags-display">${renderTags()}</div>
+        <div class="tw-input-row">
+          <input class="form-input" id="tag-input" placeholder="הוסף פריט..." onkeydown="if(event.key==='Enter'){App._addTag('${field}');event.preventDefault()}">
+          <button class="btn btn-sec" onclick="App._addTag('${field}')">+</button>
+        </div>
+      </div>
+      <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
+    `);
+    setTimeout(() => document.getElementById('tag-input')?.focus(), 200);
+  }
+
+  function _addTag(field) {
+    const inp = document.getElementById('tag-input');
+    const val = inp?.value.trim();
+    if (!val) return;
+    const p = Storage.getProfile();
+    const arr = [...(p[field]||[]), val];
+    Storage.updateProfile({ [field]: arr });
+    inp.value = '';
+    const disp = document.getElementById('tags-display');
+    if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join('');
+  }
+
+  function _removeTag(field, idx) {
+    const p = Storage.getProfile();
+    const arr = [...(p[field]||[])];
+    arr.splice(idx,1);
+    Storage.updateProfile({ [field]: arr });
+    const disp = document.getElementById('tags-display');
+    if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join('');
+  }
+
+  function editContacts() {
+    const p = Storage.getProfile();
+    const contacts = p.emergencyContacts || [];
+
+    const renderContacts = () => contacts.map((c,i) => `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
+        <div style="flex:1">
+          <div style="font-size:.87rem;font-weight:500">${c.name}</div>
+          <div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div>
+        </div>
+        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
+      </div>`).join('');
+
+    showModalSimple('אנשי קשר לחירום', `
+      <div id="contacts-list">${renderContacts()}</div>
+      <div style="display:grid;gap:8px;margin-top:14px">
+        <input class="form-input" id="c-name" placeholder="שם">
+        <input class="form-input" id="c-phone" placeholder="מספר טלפון" type="tel" dir="ltr">
+        <button class="btn btn-sec" onclick="App._addContact()">+ הוסף</button>
+      </div>
+      <div class="divider"></div>
+      <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
+    `);
+  }
+
+  function _addContact() {
+    const name = document.getElementById('c-name')?.value.trim();
+    const phone = document.getElementById('c-phone')?.value.trim();
+    if (!name || !phone) { toast('מלא שם וטלפון', 'err'); return; }
+    const p = Storage.getProfile();
+    const contacts = [...(p.emergencyContacts||[]), {name, phone}];
+    Storage.updateProfile({ emergencyContacts: contacts });
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-phone').value = '';
+    const list = document.getElementById('contacts-list');
+    if (list) list.innerHTML = contacts.map((c,i)=>`
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
+        <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div>
+        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
+      </div>`).join('');
+  }
+
+  function _removeContact(idx) {
+    const p = Storage.getProfile();
+    const contacts = [...(p.emergencyContacts||[])];
+    contacts.splice(idx, 1);
+    Storage.updateProfile({ emergencyContacts: contacts });
+    const list = document.getElementById('contacts-list');
+    if (list) list.innerHTML = contacts.map((c,i)=>`
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
+        <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div>
+        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
+      </div>`).join('');
+  }
+
+  function editApiKey() {
+    const p = Storage.getProfile();
+    showModalSimple('Gemini API Key', `
+      <div class="form-group">
+        <div class="form-label">API Key</div>
+        <input class="form-input" id="api-key-input" value="${p.geminiKey||''}" placeholder="AIza..." dir="ltr">
+        <div class="form-hint">ניתן לקבל חינם ב-aistudio.google.com</div>
+      </div>
+      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('geminiKey',document.getElementById('api-key-input').value)">שמור</button>
+    `);
+    setTimeout(() => document.getElementById('api-key-input')?.focus(), 200);
+  }
+
+  // ── Export ────────────────────────────────
+  function exportData() {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      entries: Storage.getEntries(),
+      stats: Storage.getStats()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `freeme-export-${new Date().toISOString().slice(0,10)}.json`;
+    a.click(); URL.revokeObjectURL(url);
+    toast('נתונים יוצאו ✓', 'ok');
+  }
+
+  // ── Onboarding ────────────────────────────
+  let obStep = 0;
+  const OB_STEPS = 4;
+
+  function showOnboarding() {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loading-screen').classList.add('hidden');
+    document.getElementById('onboarding-screen').style.display = 'flex';
+    obStep = 0;
+    updateOnboarding();
+  }
+
+  function updateOnboarding() {
+    document.querySelectorAll('.ob-step').forEach((el,i) => {
+      el.classList.toggle('active', i === obStep);
+    });
+    document.querySelectorAll('.pdot').forEach((el,i) => {
+      el.classList.toggle('active', i === obStep);
+    });
+  }
+
+  function nextOBStep() {
+    if (obStep === 0) {
+      const name = document.getElementById('ob-name')?.value.trim();
+      if (!name) { toast('הכנס שם כלשהו', 'err'); return; }
+      Storage.updateProfile({ name });
+    }
+    if (obStep === 1) {
+      const why = document.getElementById('ob-why')?.value.trim();
+      Storage.updateProfile({ why: why || '' });
+    }
+    if (obStep === 2) {
+      const triggers = Array.from(document.querySelectorAll('.ob-trigger.sel')).map(b=>b.dataset.t);
+      Storage.updateProfile({ triggers });
+    }
+    if (obStep === 3) {
+      const helps = document.getElementById('ob-helps')?.value.trim();
+      const key = document.getElementById('ob-key')?.value.trim();
+      Storage.updateProfile({
+        helpingStrategies: helps ? helps.split('\n').filter(Boolean) : [],
+        geminiKey: key || Storage.DEFAULT_API_KEY,
+        onboardingDone: true
+      });
+      finishOnboarding();
+      return;
+    }
+    obStep++;
+    updateOnboarding();
+  }
+
+  function prevOBStep() {
+    if (obStep > 0) { obStep--; updateOnboarding(); }
+  }
+
+  function finishOnboarding() {
+    document.getElementById('onboarding-screen').style.display = 'none';
+    document.getElementById('app').style.display = '';
+    showApp();
+    toast('ברוך הבא! 🌱', 'ok');
+  }
+
+  // ── Toast ─────────────────────────────────
+  let toastTimer = null;
+  function toast(msg, type='') {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = `toast ${type} show`;
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  }
+
+  // ── Confirm ───────────────────────────────
+  function confirm(title, desc, onConfirm) {
+    document.getElementById('confirm-title').textContent = title;
+    document.getElementById('confirm-desc').textContent = desc;
+    document.getElementById('confirm-ok').onclick = () => {
+      document.getElementById('confirm-dlg').classList.remove('open');
+      onConfirm();
+    };
+    document.getElementById('confirm-cancel').onclick = () => {
+      document.getElementById('confirm-dlg').classList.remove('open');
+    };
+    document.getElementById('confirm-dlg').classList.add('open');
+  }
+
+  return {
+    init, nav, showApp, showSOS, hideSOS,
+    showBreathing, stopBreathing,
+    showEntryForm, saveEntry, viewEntry, deleteEntry,
+    sosChatAI, openModal, closeModal, showModalSimple,
+    editProfileField, saveProfileField, editWhy, editTags,
+    _addTag, _removeTag, editContacts, _addContact, _removeContact,
+    editApiKey, exportData,
+    showOnboarding, nextOBStep, prevOBStep,
+    toast, confirm
+  };
+})();
+
+// ── Global helpers (called from inline HTML) ──────────────
+function selectEntryType(type) {
+  document.querySelectorAll('.tsel-btn').forEach(b => {
+    b.className = `tsel-btn ${b.dataset.type===type?'sel '+type:''}`;
+  });
+  const extra = document.getElementById('relapse-extra');
+  if (extra) extra.classList.toggle('vis', type==='relapse');
+}
+
+function selectMood(n) {
+  document.querySelectorAll('.ms-btn').forEach(b => {
+    b.classList.toggle('sel', parseInt(b.dataset.mood)===n);
+  });
+}
+
+function toggleTrigger(t) {
+  const btn = document.querySelector(`.ttag[data-trigger="${t}"]`);
+  if (btn) btn.classList.toggle('sel');
+}
+
+function selectDuration(d) {
+  document.querySelectorAll('.dur-btn').forEach(b => {
+    b.classList.toggle('sel', b.dataset.dur===d);
+  });
+}
+
+function closeModal(id) { App.closeModal(id); }
+
+window.addEventListener('DOMContentLoaded', () => App.init());
+</script>
+</body>
+</html>
