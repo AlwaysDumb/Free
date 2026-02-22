@@ -1096,7 +1096,11 @@ navigator.serviceWorker.register(’./sw.js’).catch(()=>{});
 }
 
 function showApp() {
-document.getElementById(‘loading-screen’).classList.add(‘hidden’);
+const ls = document.getElementById(‘loading-screen’);
+if (ls) {
+ls.classList.add(‘hidden’);
+setTimeout(() => { if(ls) ls.style.display = ‘none’; }, 600);
+}
 document.getElementById(‘app’).style.display = ‘’;
 nav(currentPage);
 }
@@ -1118,8 +1122,13 @@ profile:   Pages.profile
 const renderer = pageMap[page];
 if (!renderer) return;
 
-content.innerHTML = renderer.render();
-renderer.afterRender();
+try {
+  content.innerHTML = renderer.render();
+  renderer.afterRender();
+} catch(e) {
+  console.error('Render error:', e);
+  content.innerHTML = '<div style="color:#e05454;padding:30px;text-align:center">⚠️ שגיאת טעינה: '+e.message+'</div>';
+}
 
 // Update nav
 document.querySelectorAll('.nav-item').forEach(el => {
@@ -1521,7 +1530,11 @@ const OB_STEPS = 4;
 
 function showOnboarding() {
 document.getElementById(‘app’).style.display = ‘none’;
-document.getElementById(‘loading-screen’).classList.add(‘hidden’);
+const ls = document.getElementById(‘loading-screen’);
+if (ls) {
+ls.classList.add(‘hidden’);
+setTimeout(() => { if(ls) ls.style.display = ‘none’; }, 600);
+}
 document.getElementById(‘onboarding-screen’).style.display = ‘flex’;
 obStep = 0;
 updateOnboarding();
@@ -1642,7 +1655,15 @@ b.classList.toggle(‘sel’, b.dataset.dur===d);
 
 function closeModal(id) { App.closeModal(id); }
 
-window.addEventListener(‘DOMContentLoaded’, () => App.init());
+// Script is at bottom of body — DOM already ready, call directly
+try {
+App.init();
+} catch(e) {
+console.error(‘FreeMe init error:’, e);
+// Fallback: show error on loading screen instead of infinite spinner
+const ls = document.getElementById(‘loading-screen’);
+if (ls) ls.innerHTML = ‘<div style="color:#e05454;font-family:sans-serif;padding:30px;text-align:center"><div style="font-size:1.5rem;margin-bottom:12px">⚠️ שגיאה בטעינה</div><div style="font-size:.85rem;color:#9fa8a0;direction:ltr">’+e.message+’</div></div>’;
+}
 </script>
 
 </body>
