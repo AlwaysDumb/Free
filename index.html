@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -43,204 +44,204 @@ img{max-width:100%}
 
 /* Shell */
 #app{position:relative;height:100dvh;overflow:hidden;display:flex;flex-direction:column}
-#main-content{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+#main-content{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(var(–nav-h) + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
 #main-content::-webkit-scrollbar{display:none}
 
 /* Loading */
-#loading-screen{position:fixed;inset:0;background:var(--bg-0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:9999;transition:opacity .5s,visibility .5s}
+#loading-screen{position:fixed;inset:0;background:var(–bg-0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:9999;transition:opacity .5s,visibility .5s}
 #loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loading-logo{font-family:var(--fd);font-size:2.6rem;font-weight:700;color:var(--gold);letter-spacing:-.02em}
-.loading-sub{font-size:.82rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.loading-logo{font-family:var(–fd);font-size:2.6rem;font-weight:700;color:var(–gold);letter-spacing:-.02em}
+.loading-sub{font-size:.82rem;color:var(–t3);letter-spacing:.1em;text-transform:uppercase}
 .loading-dots{display:flex;gap:8px}
-.loading-dots span{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.3;animation:ldot 1.4s infinite}
+.loading-dots span{width:8px;height:8px;border-radius:50%;background:var(–gold);opacity:.3;animation:ldot 1.4s infinite}
 .loading-dots span:nth-child(2){animation-delay:.2s}
 .loading-dots span:nth-child(3){animation-delay:.4s}
 @keyframes ldot{0%,80%,100%{opacity:.3;transform:scale(1)}40%{opacity:1;transform:scale(1.3)}}
 
 /* Bottom Nav */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bdr);display:flex;z-index:100}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--t3);transition:color var(--t);-webkit-tap-highlight-color:transparent;position:relative}
-.nav-item.active{color:var(--gold)}
-.nav-item::before{content:'';position:absolute;top:0;width:20px;height:2px;background:var(--gold);border-radius:0 0 var(--rf) var(--rf);transform:scaleX(0);transition:transform var(--sp)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(–nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:var(–bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(–bdr);display:flex;z-index:100}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(–t3);transition:color var(–t);-webkit-tap-highlight-color:transparent;position:relative}
+.nav-item.active{color:var(–gold)}
+.nav-item::before{content:’’;position:absolute;top:0;width:20px;height:2px;background:var(–gold);border-radius:0 0 var(–rf) var(–rf);transform:scaleX(0);transition:transform var(–sp)}
 .nav-item.active::before{transform:scaleX(1)}
-.nav-icon{font-size:1.3rem;line-height:1;transition:transform var(--sp)}
+.nav-icon{font-size:1.3rem;line-height:1;transition:transform var(–sp)}
 .nav-item.active .nav-icon{transform:translateY(-2px)}
 .nav-label{font-size:.6rem;font-weight:500;letter-spacing:.03em}
 
 /* SOS FAB */
-.sos-fab{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);left:50%;transform:translateX(-50%);width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.05em;z-index:200;box-shadow:0 4px 20px rgba(224,84,84,.5);border:2px solid rgba(255,255,255,.2);transition:transform var(--sp),box-shadow var(--t);-webkit-tap-highlight-color:transparent}
+.sos-fab{position:fixed;bottom:calc(var(–nav-h) + env(safe-area-inset-bottom) + 14px);left:50%;transform:translateX(-50%);width:52px;height:52px;border-radius:50%;background:var(–red);color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.05em;z-index:200;box-shadow:0 4px 20px rgba(224,84,84,.5);border:2px solid rgba(255,255,255,.2);transition:transform var(–sp),box-shadow var(–t);-webkit-tap-highlight-color:transparent}
 .sos-fab:active{transform:translateX(-50%) scale(.9)}
 
 /* SOS Overlay */
-.sos-overlay{position:fixed;inset:0;background:var(--bg-0);z-index:500;display:flex;flex-direction:column;align-items:center;padding:56px 24px 40px;overflow-y:auto;transition:opacity .3s,visibility .3s}
+.sos-overlay{position:fixed;inset:0;background:var(–bg-0);z-index:500;display:flex;flex-direction:column;align-items:center;padding:56px 24px 40px;overflow-y:auto;transition:opacity .3s,visibility .3s}
 .sos-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.sos-pulse{width:76px;height:76px;border-radius:50%;background:var(--red-d);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:18px;animation:spulse 2s infinite}
+.sos-pulse{width:76px;height:76px;border-radius:50%;background:var(–red-d);border:2px solid var(–red);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:18px;animation:spulse 2s infinite}
 @keyframes spulse{0%,100%{box-shadow:0 0 0 0 rgba(224,84,84,.4)}50%{box-shadow:0 0 0 18px rgba(224,84,84,0)}}
 .sos-title{font-size:1.5rem;text-align:center;margin-bottom:6px}
-.sos-sub{color:var(--t2);text-align:center;margin-bottom:28px;font-size:.9rem}
+.sos-sub{color:var(–t2);text-align:center;margin-bottom:28px;font-size:.9rem}
 .sos-options{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px}
-.sos-option{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r3);padding:18px;display:flex;align-items:center;gap:14px;color:var(--t1);transition:all var(--t);text-align:right}
-.sos-option:active{background:var(--bg-3);transform:scale(.98)}
+.sos-option{background:var(–bg-2);border:1px solid var(–bdr);border-radius:var(–r3);padding:18px;display:flex;align-items:center;gap:14px;color:var(–t1);transition:all var(–t);text-align:right}
+.sos-option:active{background:var(–bg-3);transform:scale(.98)}
 .sos-opt-icon{font-size:1.9rem;flex-shrink:0}
 .sos-opt-title{font-weight:600;margin-bottom:2px;font-size:.93rem}
-.sos-opt-desc{font-size:.75rem;color:var(--t2)}
-.sos-close-btn{margin-top:20px;color:var(--t3);font-size:.87rem;padding:12px 24px}
+.sos-opt-desc{font-size:.75rem;color:var(–t2)}
+.sos-close-btn{margin-top:20px;color:var(–t3);font-size:.87rem;padding:12px 24px}
 
 /* Breathing */
-.breathing-screen{position:fixed;inset:0;background:var(--bg-0);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px}
+.breathing-screen{position:fixed;inset:0;background:var(–bg-0);z-index:600;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px}
 .breath-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:36px}
-.breath-ring{width:220px;height:220px;border-radius:50%;background:var(--blue-d);position:absolute;animation:bring 8s ease-in-out infinite}
+.breath-ring{width:220px;height:220px;border-radius:50%;background:var(–blue-d);position:absolute;animation:bring 8s ease-in-out infinite}
 @keyframes bring{0%,100%{transform:scale(.82);opacity:.4}38%{transform:scale(1.48);opacity:0}62%{transform:scale(1.05);opacity:.25}}
-.breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--blue) 0%,rgba(91,155,232,.3) 70%,transparent 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;animation:bcirc 8s ease-in-out infinite;position:relative;z-index:1}
+.breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(–blue) 0%,rgba(91,155,232,.3) 70%,transparent 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;animation:bcirc 8s ease-in-out infinite;position:relative;z-index:1}
 @keyframes bcirc{0%,100%{transform:scale(.82)}38%{transform:scale(1.28)}62%{transform:scale(1.28)}}
-.breath-count{font-size:2.2rem;font-family:var(--fd);color:#fff}
+.breath-count{font-size:2.2rem;font-family:var(–fd);color:#fff}
 .breath-phase-text{font-size:.65rem;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.breath-label{font-size:1.15rem;color:var(--t1);text-align:center;margin-bottom:6px}
-.breath-instruction{font-size:.95rem;color:var(--blue);text-align:center;margin-bottom:28px;font-weight:500;min-height:1.4rem;transition:opacity .5s}
-.breath-stop{color:var(--t3);font-size:.87rem;padding:12px 24px;background:var(--bg-2);border-radius:var(--rf)}
+.breath-label{font-size:1.15rem;color:var(–t1);text-align:center;margin-bottom:6px}
+.breath-instruction{font-size:.95rem;color:var(–blue);text-align:center;margin-bottom:28px;font-weight:500;min-height:1.4rem;transition:opacity .5s}
+.breath-stop{color:var(–t3);font-size:.87rem;padding:12px 24px;background:var(–bg-2);border-radius:var(–rf)}
 
 /* Modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:300;display:flex;align-items:flex-end;opacity:0;visibility:hidden;transition:all var(--t)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:300;display:flex;align-items:flex-end;opacity:0;visibility:hidden;transition:all var(–t)}
 .modal-backdrop.open{opacity:1;visibility:visible}
-.modal{width:100%;background:var(--bg-2);border-radius:var(--r4) var(--r4) 0 0;padding:8px 0 env(safe-area-inset-bottom);max-height:92dvh;overflow-y:auto;transform:translateY(100%);transition:transform var(--sp)}
+.modal{width:100%;background:var(–bg-2);border-radius:var(–r4) var(–r4) 0 0;padding:8px 0 env(safe-area-inset-bottom);max-height:92dvh;overflow-y:auto;transform:translateY(100%);transition:transform var(–sp)}
 .modal-backdrop.open .modal{transform:translateY(0)}
-.modal-handle{width:38px;height:4px;background:var(--bdr);border-radius:var(--rf);margin:10px auto 0}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--bdr)}
+.modal-handle{width:38px;height:4px;background:var(–bdr);border-radius:var(–rf);margin:10px auto 0}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(–bdr)}
 .modal-title{font-size:1.05rem;font-weight:600}
-.modal-close-btn{color:var(--t2);font-size:1.1rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg-3)}
+.modal-close-btn{color:var(–t2);font-size:1.1rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(–bg-3)}
 .modal-body{padding:20px}
 
 /* Pages */
-.page{min-height:calc(100dvh - var(--nav-h));animation:fsin .28s ease}
+.page{min-height:calc(100dvh - var(–nav-h));animation:fsin .28s ease}
 @keyframes fsin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* Page Header */
-.page-header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr-s);z-index:50}
+.page-header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(–bg-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(–bdr-s);z-index:50}
 .page-title{font-size:1.05rem;font-weight:600}
-.header-icon-btn{width:34px;height:34px;border-radius:50%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--t2)}
+.header-icon-btn{width:34px;height:34px;border-radius:50%;background:var(–bg-3);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(–t2)}
 
 /* Dashboard */
 .dash-hero{padding:26px 20px 16px}
-.dash-greeting{font-size:.8rem;color:var(--t2);margin-bottom:4px;letter-spacing:.03em}
-.dash-name{font-family:var(--fd);font-size:2.1rem;color:var(--t1);line-height:1.1}
-.dash-name em{font-style:normal;color:var(--gold-t)}
-.dash-date{font-size:.76rem;color:var(--t3);margin-top:5px}
-.dash-since{font-size:.76rem;color:var(--t3);margin-top:3px}
-.since-val{color:var(--green);font-weight:600}
+.dash-greeting{font-size:.8rem;color:var(–t2);margin-bottom:4px;letter-spacing:.03em}
+.dash-name{font-family:var(–fd);font-size:2.1rem;color:var(–t1);line-height:1.1}
+.dash-name em{font-style:normal;color:var(–gold-t)}
+.dash-date{font-size:.76rem;color:var(–t3);margin-top:5px}
+.dash-since{font-size:.76rem;color:var(–t3);margin-top:3px}
+.since-val{color:var(–green);font-weight:600}
 
 /* Mood Checkin */
-.mood-checkin{margin:0 16px 14px;background:var(--bg-2);border-radius:var(--r3);padding:16px;border:1px solid var(--bdr)}
-.section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:12px;font-weight:600}
+.mood-checkin{margin:0 16px 14px;background:var(–bg-2);border-radius:var(–r3);padding:16px;border:1px solid var(–bdr)}
+.section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(–t3);margin-bottom:12px;font-weight:600}
 .mood-btns{display:flex;gap:7px}
-.mood-btn{flex:1;aspect-ratio:1;border-radius:var(--r2);background:var(--bg-3);border:1.5px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all var(--t);font-size:1.25rem}
-.mood-btn .mood-word{font-size:.44rem;color:var(--t3);font-weight:500;letter-spacing:.02em}
-.mood-btn.sel{border-color:var(--gold);background:var(--gold-d)}
+.mood-btn{flex:1;aspect-ratio:1;border-radius:var(–r2);background:var(–bg-3);border:1.5px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all var(–t);font-size:1.25rem}
+.mood-btn .mood-word{font-size:.44rem;color:var(–t3);font-weight:500;letter-spacing:.02em}
+.mood-btn.sel{border-color:var(–gold);background:var(–gold-d)}
 .mood-btn:active{transform:scale(.93)}
 
 /* AI Insight Card */
-.insight-card{margin:0 16px 14px;background:linear-gradient(135deg,var(--bg-2) 0%,rgba(30,48,44,.92) 100%);border-radius:var(--r3);padding:18px;border:1px solid rgba(232,168,50,.18);position:relative;overflow:hidden}
-.insight-card::before{content:'';position:absolute;top:-28px;right:-28px;width:90px;height:90px;border-radius:50%;background:var(--gold-d);filter:blur(20px)}
+.insight-card{margin:0 16px 14px;background:linear-gradient(135deg,var(–bg-2) 0%,rgba(30,48,44,.92) 100%);border-radius:var(–r3);padding:18px;border:1px solid rgba(232,168,50,.18);position:relative;overflow:hidden}
+.insight-card::before{content:’’;position:absolute;top:-28px;right:-28px;width:90px;height:90px;border-radius:50%;background:var(–gold-d);filter:blur(20px)}
 .insight-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .insight-icon{font-size:1rem}
-.insight-lbl{font-size:.7rem;color:var(--gold-t);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.insight-txt{font-size:.88rem;color:var(--t1);line-height:1.75;position:relative;z-index:1}
-.insight-txt.loading{color:var(--t3);font-style:italic}
-.insight-refresh{font-size:.7rem;color:var(--t3);margin-top:10px;display:block}
+.insight-lbl{font-size:.7rem;color:var(–gold-t);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.insight-txt{font-size:.88rem;color:var(–t1);line-height:1.75;position:relative;z-index:1}
+.insight-txt.loading{color:var(–t3);font-style:italic}
+.insight-refresh{font-size:.7rem;color:var(–t3);margin-top:10px;display:block}
 
 /* Quick Stats */
 .quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 16px 14px}
-.stat-card{background:var(--bg-2);border-radius:var(--r2);padding:14px 10px;text-align:center;border:1px solid var(--bdr)}
-.stat-val{font-family:var(--fd);font-size:1.5rem;color:var(--gold-t);line-height:1;margin-bottom:4px}
-.stat-lbl{font-size:.58rem;color:var(--t3);font-weight:500;letter-spacing:.02em;line-height:1.4}
+.stat-card{background:var(–bg-2);border-radius:var(–r2);padding:14px 10px;text-align:center;border:1px solid var(–bdr)}
+.stat-val{font-family:var(–fd);font-size:1.5rem;color:var(–gold-t);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:.58rem;color:var(–t3);font-weight:500;letter-spacing:.02em;line-height:1.4}
 
 /* Section headers */
 .section-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:10px}
-.section-hdr-txt{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);font-weight:600}
-.section-hdr-link{font-size:.72rem;color:var(--gold)}
+.section-hdr-txt{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(–t3);font-weight:600}
+.section-hdr-link{font-size:.72rem;color:var(–gold)}
 
 /* Entry Cards */
 .entry-list{padding:0 16px;display:flex;flex-direction:column;gap:9px}
-.entry-card{background:var(--bg-2);border-radius:var(--r3);border:1px solid var(--bdr);padding:14px;display:flex;gap:12px;align-items:flex-start;transition:all var(--t)}
-.entry-card:active{background:var(--bg-3)}
+.entry-card{background:var(–bg-2);border-radius:var(–r3);border:1px solid var(–bdr);padding:14px;display:flex;gap:12px;align-items:flex-start;transition:all var(–t)}
+.entry-card:active{background:var(–bg-3)}
 .entry-bar{width:3px;border-radius:2px;align-self:stretch;flex-shrink:0;min-height:36px}
-.entry-bar.checkin{background:var(--blue)}
-.entry-bar.relapse{background:var(--red)}
-.entry-bar.win{background:var(--green)}
+.entry-bar.checkin{background:var(–blue)}
+.entry-bar.relapse{background:var(–red)}
+.entry-bar.win{background:var(–green)}
 .entry-content{flex:1;min-width:0}
 .entry-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
 .entry-type{font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
-.entry-type.checkin{color:var(--blue)}
-.entry-type.relapse{color:var(--red)}
-.entry-type.win{color:var(--green)}
-.entry-date{font-size:.66rem;color:var(--t3)}
-.entry-desc{font-size:.83rem;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}
+.entry-type.checkin{color:var(–blue)}
+.entry-type.relapse{color:var(–red)}
+.entry-type.win{color:var(–green)}
+.entry-date{font-size:.66rem;color:var(–t3)}
+.entry-desc{font-size:.83rem;color:var(–t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}
 .entry-mood{display:flex;gap:2px;align-items:center}
-.mood-pip{width:5px;height:5px;border-radius:50%;background:var(--bg-3)}
-.mood-pip.on{background:var(--gold)}
+.mood-pip{width:5px;height:5px;border-radius:50%;background:var(–bg-3)}
+.mood-pip.on{background:var(–gold)}
 .entry-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
-.etag{font-size:.6rem;padding:1px 7px;background:var(--bg-3);border-radius:var(--rf);color:var(--t2)}
+.etag{font-size:.6rem;padding:1px 7px;background:var(–bg-3);border-radius:var(–rf);color:var(–t2)}
 
 /* Journal FAB */
-.jfab{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 80px);left:18px;height:50px;padding:0 18px;background:var(--gold);color:#09100f;border-radius:var(--rf);font-weight:700;font-size:.86rem;box-shadow:var(--sh-gold);display:flex;align-items:center;gap:7px;z-index:150;transition:all var(--t)}
+.jfab{position:fixed;bottom:calc(var(–nav-h) + env(safe-area-inset-bottom) + 80px);left:18px;height:50px;padding:0 18px;background:var(–gold);color:#09100f;border-radius:var(–rf);font-weight:700;font-size:.86rem;box-shadow:var(–sh-gold);display:flex;align-items:center;gap:7px;z-index:150;transition:all var(–t)}
 .jfab:active{transform:scale(.95)}
 
 /* Forms */
 .form-group{margin-bottom:18px}
-.form-label{display:block;font-size:.77rem;color:var(--t2);margin-bottom:7px;font-weight:500}
-.form-input,.form-textarea,.form-select{width:100%;background:var(--bg-3);border:1.5px solid var(--bdr);border-radius:var(--r2);color:var(--t1);padding:11px 15px;font-size:.91rem;outline:none;transition:border-color var(--t);resize:none;appearance:none}
-.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--gold)}
+.form-label{display:block;font-size:.77rem;color:var(–t2);margin-bottom:7px;font-weight:500}
+.form-input,.form-textarea,.form-select{width:100%;background:var(–bg-3);border:1.5px solid var(–bdr);border-radius:var(–r2);color:var(–t1);padding:11px 15px;font-size:.91rem;outline:none;transition:border-color var(–t);resize:none;appearance:none}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(–gold)}
 .form-textarea{min-height:85px;line-height:1.6}
-.form-hint{font-size:.7rem;color:var(--t3);margin-top:4px}
+.form-hint{font-size:.7rem;color:var(–t3);margin-top:4px}
 
 /* Type Selector */
 .type-sel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tsel-btn{padding:12px 6px;border-radius:var(--r2);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.74rem;font-weight:500;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all var(--t)}
+.tsel-btn{padding:12px 6px;border-radius:var(–r2);background:var(–bg-3);border:1.5px solid transparent;color:var(–t2);font-size:.74rem;font-weight:500;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all var(–t)}
 .tsel-emoji{font-size:1.2rem}
-.tsel-btn.sel.checkin{border-color:var(--blue);background:var(--blue-d);color:var(--blue)}
-.tsel-btn.sel.relapse{border-color:var(--red);background:var(--red-d);color:var(--red)}
-.tsel-btn.sel.win{border-color:var(--green);background:var(--green-d);color:var(--green)}
+.tsel-btn.sel.checkin{border-color:var(–blue);background:var(–blue-d);color:var(–blue)}
+.tsel-btn.sel.relapse{border-color:var(–red);background:var(–red-d);color:var(–red)}
+.tsel-btn.sel.win{border-color:var(–green);background:var(–green-d);color:var(–green)}
 
 /* Mood Scale */
 .mood-scale{display:flex;gap:7px}
-.ms-btn{flex:1;aspect-ratio:1;border-radius:var(--r1);background:var(--bg-3);font-size:1.2rem;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;transition:all var(--t)}
-.ms-btn.sel{border-color:var(--gold);background:var(--gold-d);transform:scale(1.08)}
+.ms-btn{flex:1;aspect-ratio:1;border-radius:var(–r1);background:var(–bg-3);font-size:1.2rem;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;transition:all var(–t)}
+.ms-btn.sel{border-color:var(–gold);background:var(–gold-d);transform:scale(1.08)}
 
 /* Trigger Tags */
 .trig-tags{display:flex;flex-wrap:wrap;gap:7px}
-.ttag{padding:6px 13px;border-radius:var(--rf);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.77rem;transition:all var(--t)}
-.ttag.sel{background:var(--gold-d);border-color:var(--gold);color:var(--gold-t)}
+.ttag{padding:6px 13px;border-radius:var(–rf);background:var(–bg-3);border:1.5px solid transparent;color:var(–t2);font-size:.77rem;transition:all var(–t)}
+.ttag.sel{background:var(–gold-d);border-color:var(–gold);color:var(–gold-t)}
 
 /* Duration */
 .dur-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.dur-btn{padding:8px 4px;border-radius:var(--r1);background:var(--bg-3);border:1.5px solid transparent;color:var(--t2);font-size:.7rem;font-weight:500;text-align:center;transition:all var(--t)}
-.dur-btn.sel{border-color:var(--red);background:var(--red-d);color:var(--red)}
+.dur-btn{padding:8px 4px;border-radius:var(–r1);background:var(–bg-3);border:1.5px solid transparent;color:var(–t2);font-size:.7rem;font-weight:500;text-align:center;transition:all var(–t)}
+.dur-btn.sel{border-color:var(–red);background:var(–red-d);color:var(–red)}
 
 /* Relapse extra */
 .relapse-extra{display:none}
 .relapse-extra.vis{display:block}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:var(--rf);font-size:.87rem;font-weight:600;transition:all var(--t)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:var(–rf);font-size:.87rem;font-weight:600;transition:all var(–t)}
 .btn:active{transform:scale(.97)}
-.btn-pri{background:var(--gold);color:#09100f;box-shadow:var(--sh-gold)}
-.btn-sec{background:var(--bg-3);color:var(--t1);border:1px solid var(--bdr)}
-.btn-dng{background:var(--red-d);color:var(--red);border:1px solid rgba(224,84,84,.3)}
-.btn-ghost{color:var(--t2)}
+.btn-pri{background:var(–gold);color:#09100f;box-shadow:var(–sh-gold)}
+.btn-sec{background:var(–bg-3);color:var(–t1);border:1px solid var(–bdr)}
+.btn-dng{background:var(–red-d);color:var(–red);border:1px solid rgba(224,84,84,.3)}
+.btn-ghost{color:var(–t2)}
 .btn-full{width:100%}
 
 /* Insights */
-.chart-card{margin:0 16px 14px;background:var(--bg-2);border-radius:var(--r3);padding:18px;border:1px solid var(--bdr)}
-.chart-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);font-weight:600;margin-bottom:14px}
+.chart-card{margin:0 16px 14px;background:var(–bg-2);border-radius:var(–r3);padding:18px;border:1px solid var(–bdr)}
+.chart-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(–t3);font-weight:600;margin-bottom:14px}
 .bar-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.bar-lbl{font-size:.7rem;color:var(--t2);width:65px;text-align:right;flex-shrink:0}
-.bar-track{flex:1;height:7px;background:var(--bg-3);border-radius:var(--rf);overflow:hidden}
-.bar-fill{height:100%;border-radius:var(--rf);background:var(--gold);transition:width 1s cubic-bezier(.4,0,.2,1);width:0}
-.bar-count{font-size:.7rem;color:var(--t3);width:18px;text-align:left;flex-shrink:0}
+.bar-lbl{font-size:.7rem;color:var(–t2);width:65px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:var(–bg-3);border-radius:var(–rf);overflow:hidden}
+.bar-fill{height:100%;border-radius:var(–rf);background:var(–gold);transition:width 1s cubic-bezier(.4,0,.2,1);width:0}
+.bar-count{font-size:.7rem;color:var(–t3);width:18px;text-align:left;flex-shrink:0}
 .ins-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 16px 14px}
-.isc{background:var(--bg-2);border-radius:var(--r3);padding:16px;border:1px solid var(--bdr)}
-.isc-val{font-family:var(--fd);font-size:1.7rem;line-height:1;margin-bottom:3px;color:var(--gold-t)}
-.isc-lbl{font-size:.63rem;color:var(--t3);font-weight:500;letter-spacing:.03em;line-height:1.3}
-.isc-sub{font-size:.68rem;color:var(--t3);margin-top:5px}
+.isc{background:var(–bg-2);border-radius:var(–r3);padding:16px;border:1px solid var(–bdr)}
+.isc-val{font-family:var(–fd);font-size:1.7rem;line-height:1;margin-bottom:3px;color:var(–gold-t)}
+.isc-lbl{font-size:.63rem;color:var(–t3);font-weight:500;letter-spacing:.03em;line-height:1.3}
+.isc-sub{font-size:.68rem;color:var(–t3);margin-top:5px}
 
 /* Mood SVG Chart */
 .mood-chart-wrap{position:relative;width:100%;height:110px}
@@ -248,129 +249,131 @@ img{max-width:100%}
 
 /* Hour heatmap */
 .hour-hm{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
-.hcell{aspect-ratio:1;border-radius:3px;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:.38rem;color:var(--t3)}
-.hcell[data-l="1"]{background:rgba(232,168,50,.22)}
-.hcell[data-l="2"]{background:rgba(232,168,50,.5)}
-.hcell[data-l="3"]{background:rgba(224,84,84,.7)}
+.hcell{aspect-ratio:1;border-radius:3px;background:var(–bg-3);display:flex;align-items:center;justify-content:center;font-size:.38rem;color:var(–t3)}
+.hcell[data-l=“1”]{background:rgba(232,168,50,.22)}
+.hcell[data-l=“2”]{background:rgba(232,168,50,.5)}
+.hcell[data-l=“3”]{background:rgba(224,84,84,.7)}
 .hlabel-row{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:4px}
-.hlabel{font-size:.46rem;color:var(--t3);text-align:center}
+.hlabel{font-size:.46rem;color:var(–t3);text-align:center}
 
 /* Analysis */
-.analysis-card{margin:0 16px 14px;background:linear-gradient(135deg,var(--bg-2),rgba(30,48,44,.92));border-radius:var(--r3);padding:18px;border:1px solid rgba(78,203,138,.15)}
-.analysis-txt{font-size:.86rem;color:var(--t1);line-height:1.82;white-space:pre-wrap}
-.analysis-loading{color:var(--t3);font-style:italic;font-size:.86rem}
+.analysis-card{margin:0 16px 14px;background:linear-gradient(135deg,var(–bg-2),rgba(30,48,44,.92));border-radius:var(–r3);padding:18px;border:1px solid rgba(78,203,138,.15)}
+.analysis-txt{font-size:.86rem;color:var(–t1);line-height:1.82;white-space:pre-wrap}
+.analysis-loading{color:var(–t3);font-style:italic;font-size:.86rem}
 
 /* Toolbox */
 .tb-section{padding:0 16px;margin-bottom:22px}
 .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.tool-card{background:var(--bg-2);border-radius:var(--r3);padding:18px 14px;border:1px solid var(--bdr);display:flex;flex-direction:column;gap:8px;transition:all var(--t)}
-.tool-card:active{transform:scale(.97);background:var(--bg-3)}
+.tool-card{background:var(–bg-2);border-radius:var(–r3);padding:18px 14px;border:1px solid var(–bdr);display:flex;flex-direction:column;gap:8px;transition:all var(–t)}
+.tool-card:active{transform:scale(.97);background:var(–bg-3)}
 .tc-icon{font-size:1.55rem}
-.tc-name{font-size:.87rem;font-weight:600;color:var(--t1);line-height:1.2}
-.tc-desc{font-size:.7rem;color:var(--t2);line-height:1.4}
-.tech-card{background:var(--bg-2);border-radius:var(--r3);border:1px solid var(--bdr);overflow:hidden;margin-bottom:9px}
+.tc-name{font-size:.87rem;font-weight:600;color:var(–t1);line-height:1.2}
+.tc-desc{font-size:.7rem;color:var(–t2);line-height:1.4}
+.tech-card{background:var(–bg-2);border-radius:var(–r3);border:1px solid var(–bdr);overflow:hidden;margin-bottom:9px}
 .tech-hdr{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tech-hdr-left{display:flex;align-items:center;gap:10px}
 .tech-icon{font-size:1.15rem}
-.tech-title{font-size:.87rem;font-weight:600;color:var(--t1)}
-.tech-arrow{color:var(--t3);font-size:.8rem;transition:transform var(--t)}
+.tech-title{font-size:.87rem;font-weight:600;color:var(–t1)}
+.tech-arrow{color:var(–t3);font-size:.8rem;transition:transform var(–t)}
 .tech-card.open .tech-arrow{transform:rotate(180deg)}
 .tech-body{display:none;padding:0 18px 16px}
 .tech-card.open .tech-body{display:block}
-.tech-step{display:flex;gap:10px;margin-bottom:9px;font-size:.82rem;color:var(--t2);line-height:1.55}
-.step-n{width:20px;height:20px;border-radius:50%;background:var(--gold-d);color:var(--gold-t);font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.tech-step{display:flex;gap:10px;margin-bottom:9px;font-size:.82rem;color:var(–t2);line-height:1.55}
+.step-n{width:20px;height:20px;border-radius:50%;background:var(–gold-d);color:var(–gold-t);font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .contacts-list{display:flex;flex-direction:column;gap:8px}
-.contact-card{background:var(--bg-2);border-radius:var(--r2);border:1px solid var(--bdr);padding:14px;display:flex;align-items:center;gap:12px}
-.contact-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold-d);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.contact-name{font-size:.88rem;font-weight:500;color:var(--t1)}
-.contact-phone{font-size:.75rem;color:var(--t3);direction:ltr}
-.contact-call{margin-right:auto;color:var(--green);font-size:1.2rem}
+.contact-card{background:var(–bg-2);border-radius:var(–r2);border:1px solid var(–bdr);padding:14px;display:flex;align-items:center;gap:12px}
+.contact-avatar{width:38px;height:38px;border-radius:50%;background:var(–gold-d);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-name{font-size:.88rem;font-weight:500;color:var(–t1)}
+.contact-phone{font-size:.75rem;color:var(–t3);direction:ltr}
+.contact-call{margin-right:auto;color:var(–green);font-size:1.2rem}
 
 /* Chat */
 .chat-msgs{padding:16px;display:flex;flex-direction:column;gap:11px;padding-bottom:86px}
 .chat-bubble{max-width:84%;padding:12px 15px;font-size:.86rem;line-height:1.65;animation:bbl .3s cubic-bezier(.34,1.56,.64,1)}
 @keyframes bbl{from{opacity:0;transform:scale(.91) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.chat-bubble.ai{background:var(--bg-2);border:1px solid var(--bdr);border-radius:17px 17px 4px 17px;align-self:flex-end;color:var(--t1)}
-.chat-bubble.user{background:var(--gold-d);border:1px solid rgba(232,168,50,.25);border-radius:17px 17px 17px 4px;align-self:flex-start;color:var(--t1)}
+.chat-bubble.ai{background:var(–bg-2);border:1px solid var(–bdr);border-radius:17px 17px 4px 17px;align-self:flex-end;color:var(–t1)}
+.chat-bubble.user{background:var(–gold-d);border:1px solid rgba(232,168,50,.25);border-radius:17px 17px 17px 4px;align-self:flex-start;color:var(–t1)}
 .chat-bubble.typing{display:flex;gap:5px;padding:15px 18px;align-self:flex-end}
-.tdot{width:7px;height:7px;border-radius:50%;background:var(--t3);animation:tdot 1.2s infinite}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(–t3);animation:tdot 1.2s infinite}
 .tdot:nth-child(2){animation-delay:.2s}
 .tdot:nth-child(3){animation-delay:.4s}
 @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
-.chat-input-bar{position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));left:0;right:0;padding:9px 14px;background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bdr);display:flex;gap:9px;align-items:flex-end;z-index:100}
-.chat-input{flex:1;background:var(--bg-3);border:1.5px solid var(--bdr);border-radius:19px;color:var(--t1);padding:10px 15px;font-size:.87rem;outline:none;resize:none;max-height:110px;overflow-y:auto;line-height:1.5;transition:border-color var(--t)}
-.chat-input:focus{border-color:var(--gold)}
-.chat-send{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#09100f;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--t)}
-.chat-send:disabled{background:var(--bg-3);color:var(--t3)}
+.chat-input-bar{position:fixed;bottom:calc(var(–nav-h) + env(safe-area-inset-bottom));left:0;right:0;padding:9px 14px;background:var(–bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(–bdr);display:flex;gap:9px;align-items:flex-end;z-index:100}
+.chat-input{flex:1;background:var(–bg-3);border:1.5px solid var(–bdr);border-radius:19px;color:var(–t1);padding:10px 15px;font-size:.87rem;outline:none;resize:none;max-height:110px;overflow-y:auto;line-height:1.5;transition:border-color var(–t)}
+.chat-input:focus{border-color:var(–gold)}
+.chat-send{width:40px;height:40px;border-radius:50%;background:var(–gold);color:#09100f;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(–t)}
+.chat-send:disabled{background:var(–bg-3);color:var(–t3)}
 .chat-send:active:not(:disabled){transform:scale(.91)}
-.chat-day{font-size:.63rem;color:var(--t3);text-align:center;padding:4px 0}
+.chat-day{font-size:.63rem;color:var(–t3);text-align:center;padding:4px 0}
 
 /* Profile */
 .prof-hdr{padding:26px 20px 14px;text-align:center}
-.prof-avatar{width:70px;height:70px;border-radius:50%;background:var(--gold-d);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 10px}
-.prof-dname{font-family:var(--fd);font-size:1.4rem;margin-bottom:3px}
-.prof-since{font-size:.73rem;color:var(--t3)}
+.prof-avatar{width:70px;height:70px;border-radius:50%;background:var(–gold-d);border:2px solid var(–gold);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 10px}
+.prof-dname{font-family:var(–fd);font-size:1.4rem;margin-bottom:3px}
+.prof-since{font-size:.73rem;color:var(–t3)}
 .prof-section{padding:0 16px;margin-bottom:22px}
-.srow{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r2);padding:13px 15px;display:flex;align-items:center;gap:11px;margin-bottom:7px;transition:all var(--t)}
-.srow:active{background:var(--bg-3)}
+.srow{background:var(–bg-2);border:1px solid var(–bdr);border-radius:var(–r2);padding:13px 15px;display:flex;align-items:center;gap:11px;margin-bottom:7px;transition:all var(–t)}
+.srow:active{background:var(–bg-3)}
 .srow-icon{font-size:.95rem;width:20px;text-align:center}
 .srow-content{flex:1}
-.srow-label{font-size:.86rem;font-weight:500;color:var(--t1)}
-.srow-val{font-size:.7rem;color:var(--t3);margin-top:1px;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.srow-arrow{color:var(--t3);font-size:.78rem}
+.srow-label{font-size:.86rem;font-weight:500;color:var(–t1)}
+.srow-val{font-size:.7rem;color:var(–t3);margin-top:1px;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow-arrow{color:var(–t3);font-size:.78rem}
 
 /* Onboarding */
-.ob-screen{min-height:100dvh;display:flex;flex-direction:column;padding:52px 24px 40px;background:var(--bg-0)}
+.ob-screen{min-height:100dvh;display:flex;flex-direction:column;padding:52px 24px 40px;background:var(–bg-0)}
 .ob-step{display:none;flex:1;flex-direction:column;animation:fsin .38s ease}
 .ob-step.active{display:flex}
 .ob-icon{font-size:3.5rem;margin-bottom:22px}
-.ob-title{font-family:var(--fd);font-size:1.9rem;color:var(--t1);margin-bottom:10px;line-height:1.2}
-.ob-title em{font-style:normal;color:var(--gold-t)}
-.ob-desc{font-size:.92rem;color:var(--t2);line-height:1.82;margin-bottom:26px}
+.ob-title{font-family:var(–fd);font-size:1.9rem;color:var(–t1);margin-bottom:10px;line-height:1.2}
+.ob-title em{font-style:normal;color:var(–gold-t)}
+.ob-desc{font-size:.92rem;color:var(–t2);line-height:1.82;margin-bottom:26px}
 .ob-form{flex:1;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
 .ob-footer{margin-top:auto;padding-top:18px}
 .ob-progress{display:flex;gap:6px;justify-content:center;margin-bottom:18px}
-.pdot{width:6px;height:6px;border-radius:50%;background:var(--bg-3);transition:all var(--t)}
-.pdot.active{background:var(--gold);width:18px;border-radius:3px}
+.pdot{width:6px;height:6px;border-radius:50%;background:var(–bg-3);transition:all var(–t)}
+.pdot.active{background:var(–gold);width:18px;border-radius:3px}
 
 /* Tags Input widget */
 .tags-widget{}
 .tags-display{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px}
-.tw-tag{display:flex;align-items:center;gap:5px;padding:4px 10px;background:var(--bg-3);border:1px solid var(--bdr);border-radius:var(--rf);font-size:.77rem;color:var(--t1)}
-.tw-rem{color:var(--t3);font-size:.9rem;line-height:1}
+.tw-tag{display:flex;align-items:center;gap:5px;padding:4px 10px;background:var(–bg-3);border:1px solid var(–bdr);border-radius:var(–rf);font-size:.77rem;color:var(–t1)}
+.tw-rem{color:var(–t3);font-size:.9rem;line-height:1}
 .tw-input-row{display:flex;gap:7px}
 
 /* Empty state */
 .empty-state{text-align:center;padding:56px 28px}
 .es-icon{font-size:2.8rem;margin-bottom:14px}
-.es-title{font-family:var(--fd);font-size:1.15rem;color:var(--t1);margin-bottom:7px}
-.es-desc{font-size:.84rem;color:var(--t2);line-height:1.65;margin-bottom:22px}
+.es-title{font-family:var(–fd);font-size:1.15rem;color:var(–t1);margin-bottom:7px}
+.es-desc{font-size:.84rem;color:var(–t2);line-height:1.65;margin-bottom:22px}
 
 /* Toast */
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--bg-3);border:1px solid var(--bdr);border-radius:var(--rf);padding:9px 18px;font-size:.82rem;color:var(--t1);z-index:900;transition:transform var(--sp);white-space:nowrap}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(–bg-3);border:1px solid var(–bdr);border-radius:var(–rf);padding:9px 18px;font-size:.82rem;color:var(–t1);z-index:900;transition:transform var(–sp);white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast.ok{border-color:rgba(78,203,138,.4);color:var(--green)}
-.toast.err{border-color:rgba(224,84,84,.4);color:var(--red)}
+.toast.ok{border-color:rgba(78,203,138,.4);color:var(–green)}
+.toast.err{border-color:rgba(224,84,84,.4);color:var(–red)}
 
 /* Confirm dialog */
-.confirm-dlg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:700;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:all var(--t)}
+.confirm-dlg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:700;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:all var(–t)}
 .confirm-dlg.open{opacity:1;visibility:visible}
-.confirm-box{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r4);padding:28px 24px;width:100%;max-width:320px;text-align:center}
+.confirm-box{background:var(–bg-2);border:1px solid var(–bdr);border-radius:var(–r4);padding:28px 24px;width:100%;max-width:320px;text-align:center}
 .confirm-title{font-size:1.1rem;font-weight:600;margin-bottom:8px}
-.confirm-desc{font-size:.87rem;color:var(--t2);line-height:1.6;margin-bottom:22px}
+.confirm-desc{font-size:.87rem;color:var(–t2);line-height:1.6;margin-bottom:22px}
 .confirm-actions{display:flex;gap:10px}
 
 /* Helpers */
 .hidden{display:none!important}
 .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
-.divider{height:1px;background:var(--bdr);margin:14px 0}
+.divider{height:1px;background:var(–bdr);margin:14px 0}
 .spacer{height:24px}
 *::-webkit-scrollbar{display:none}
-  </style>
+</style>
+
 </head>
 <body>
 
 <!-- ── Loading Screen ─────────────────────── -->
+
 <div id="loading-screen">
   <div class="loading-logo">FreeMe</div>
   <div class="loading-sub">מסע שיפור עצמי</div>
@@ -378,9 +381,11 @@ img{max-width:100%}
 </div>
 
 <!-- ── Onboarding ─────────────────────────── -->
+
 <div id="onboarding-screen" style="display:none" class="ob-screen">
 
   <!-- Step 0: Welcome & Name -->
+
   <div class="ob-step active">
     <div class="ob-icon">🌱</div>
     <div class="ob-title">ברוך הבא ל<em>FreeMe</em></div>
@@ -400,6 +405,7 @@ img{max-width:100%}
   </div>
 
   <!-- Step 1: Why -->
+
   <div class="ob-step">
     <div class="ob-icon">💡</div>
     <div class="ob-title">למה <em>אתה</em> עושה את זה?</div>
@@ -419,6 +425,7 @@ img{max-width:100%}
   </div>
 
   <!-- Step 2: Triggers -->
+
   <div class="ob-step">
     <div class="ob-icon">⚡</div>
     <div class="ob-title">מה <em>מפעיל</em> אותך?</div>
@@ -451,6 +458,7 @@ img{max-width:100%}
   </div>
 
   <!-- Step 3: Strategies & API Key -->
+
   <div class="ob-step">
     <div class="ob-icon">🔑</div>
     <div class="ob-title">מה <em>עוזר</em> לך?</div>
@@ -463,7 +471,7 @@ img{max-width:100%}
       <div class="form-group">
         <div class="form-label">Gemini API Key (ל-AI)</div>
         <input class="form-input" id="ob-key" placeholder="AIzaSy..." dir="ltr" style="font-size:.82rem">
-        <div class="form-hint">כבר מוגדר ✓ — ניתן לשנות בהגדרות אחר כך</div>
+        <div class="form-hint" style="color:var(--gold)">⚠️ חובה! ניתן לקבל בחינם ב-aistudio.google.com</div>
       </div>
     </div>
     <div class="ob-footer">
@@ -480,12 +488,15 @@ img{max-width:100%}
 </div>
 
 <!-- ── Main App ────────────────────────────── -->
+
 <div id="app" style="display:none">
 
   <!-- Content Area -->
+
   <div id="main-content"></div>
 
   <!-- Bottom Nav -->
+
   <nav class="bottom-nav">
     <button class="nav-item" data-page="dashboard" onclick="App.nav('dashboard')">
       <span class="nav-icon">🏠</span><span class="nav-label">בית</span>
@@ -510,9 +521,11 @@ img{max-width:100%}
   </nav>
 
   <!-- SOS Floating Button -->
-  <button class="sos-fab" onclick="App.showSOS()">SOS</button>
+
+<button class="sos-fab" onclick="App.showSOS()">SOS</button>
 
   <!-- SOS Overlay -->
+
   <div class="sos-overlay hidden" id="sos-overlay">
     <div class="sos-pulse">🛑</div>
     <div class="sos-title">אתה לא לבד</div>
@@ -551,6 +564,7 @@ img{max-width:100%}
   </div>
 
   <!-- Breathing Screen -->
+
   <div class="breathing-screen" id="breathing-screen" style="display:none">
     <div class="breath-label">נשימה מרגיעה 4-7-8</div>
     <div class="breath-ring-wrap">
@@ -565,6 +579,7 @@ img{max-width:100%}
   </div>
 
   <!-- Entry Modal -->
+
   <div class="modal-backdrop" id="entry-modal" onclick="event.target===this&&closeModal('entry-modal')">
     <div class="modal">
       <div class="modal-handle"></div>
@@ -577,6 +592,7 @@ img{max-width:100%}
   </div>
 
   <!-- Confirm Dialog -->
+
   <div class="confirm-dlg" id="confirm-dlg">
     <div class="confirm-box">
       <div class="confirm-title" id="confirm-title">האם אתה בטוח?</div>
@@ -589,6 +605,7 @@ img{max-width:100%}
   </div>
 
   <!-- Toast -->
+
   <div class="toast" id="toast"></div>
 
 </div>
@@ -596,15 +613,15 @@ img{max-width:100%}
 <script>
 // FreeMe — Storage Layer
 const Storage = (() => {
-  const KEY = 'AIzaSyCTBUBep6mifoxAyb5OmyYSxuU9NC3MwZs';
+  const KEY = ''; // Key stored in localStorage only — never in code
   const g = (k,d=null)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d}catch{return d}};
   const s = (k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){console.error(e)}};
   
   return {
-    getProfile(){ return g('fm_profile',{name:'',why:'',triggers:[],helpingStrategies:[],notHelpingStrategies:[],emergencyContacts:[],geminiKey:KEY,onboardingDone:false,joinedAt:new Date().toISOString()}) },
+    getProfile(){ return g('fm_profile',{name:'',why:'',triggers:[],helpingStrategies:[],notHelpingStrategies:[],emergencyContacts:[],geminiKey:'',onboardingDone:false,joinedAt:new Date().toISOString()}) },
     setProfile(d){ s('fm_profile',d) },
     updateProfile(p){ this.setProfile({...this.getProfile(),...p}) },
-    getApiKey(){ return this.getProfile().geminiKey||KEY },
+    getApiKey(){ const k=this.getProfile().geminiKey; return k||'' },
     
     getEntries(){ return g('fm_entries',[]) },
     addEntry(entry){
@@ -691,6 +708,7 @@ ${recent.map(e=>`[${new Date(e.createdAt).toLocaleDateString('he-IL')}] ${e.type
   
   async function call(messages) {
     const key = Storage.getApiKey();
+    if (!key) throw new Error('NO_KEY');
     const res = await fetch(`${URL}?key=${key}`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
@@ -854,7 +872,7 @@ const Pages = (() => {
       if(!el)return;
       el.className='insight-txt loading'; el.textContent='טוען תובנה...';
       try { const t=await Gemini.getDailyInsight(); el.className='insight-txt'; el.textContent=t; }
-      catch(e){ el.textContent='לא הצלחתי לטעון תובנה.'; }
+      catch(e){ el.textContent = e.message==='NO_KEY' ? '⚠️ הכנס Gemini API Key בפרופיל → הגדרות' : 'לא הצלחתי לטעון תובנה. בדוק חיבור לרשת.'; }
     }
   };
 
@@ -1012,674 +1030,620 @@ const Pages = (() => {
         </div>
         <div class="chat-input-bar">
           <textarea class="chat-input" id="chat-input" placeholder="כתוב כאן..." rows="1" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,110)+'px';document.getElementById('chat-send').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Pages.chat.send()}"></textarea>
-          <button class="chat-send" id="chat-send" disabled onclick="Pages.chat.send()">➤</button>
-        </div>`;
-    },
-    afterRender(){const m=document.getElementById('chat-msgs');if(m)m.scrollTop=m.scrollHeight;},
-    async send(){
-      const inp=document.getElementById('chat-input'),btn=document.getElementById('chat-send'),msgs=document.getElementById('chat-msgs');
-      if(!inp||!msgs)return;
-      const text=inp.value.trim();if(!text)return;
-      inp.value='';inp.style.height='auto';if(btn)btn.disabled=true;
-      msgs.innerHTML+=`<div class="chat-bubble user">${text.replace(/\n/g,'<br>')}</div>`;
-      Storage.addChatMessage('user',text);
-      msgs.innerHTML+=`<div class="chat-bubble typing ai" id="typing-ind"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
-      msgs.scrollTop=msgs.scrollHeight;
-      try{
-        const history=Storage.getChatHistory().slice(-20);
-        const reply=await Gemini.chat(text,history.slice(0,-1));
-        document.getElementById('typing-ind')?.remove();
-        msgs.innerHTML+=`<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
-        Storage.addChatMessage('assistant',reply);
-      } catch(e){
-        document.getElementById('typing-ind')?.remove();
-        msgs.innerHTML+=`<div class="chat-bubble ai">שגיאה. בדוק חיבור לרשת.</div>`;
-      }
-      msgs.scrollTop=msgs.scrollHeight;if(btn)btn.disabled=false;
-    },
-    clear(){App.confirm('לנקות את השיחה?','ההיסטוריה תימחק',()=>{Storage.clearChatHistory();App.nav('chat');});}
-  };
 
-  // ── PROFILE ──────────────────────────────
-  const profile = {
-    render() {
-      const p=Storage.getProfile();
-      const joined=new Date(p.joinedAt||Date.now()).toLocaleDateString('he-IL',{year:'numeric',month:'long',day:'numeric'});
-      return `
-        <div class="page" id="page-profile">
-          <div class="page-header"><span class="page-title">פרופיל</span></div>
-          <div class="prof-hdr">
-            <div class="prof-avatar">🌱</div>
-            <div class="prof-dname">${p.name||'אנונימי'}</div>
-            <div class="prof-since">מ: ${joined}</div>
-          </div>
-          <div class="prof-section">
-            <div class="section-label">פרטים אישיים</div>
-            <button class="srow" onclick="App.editProfileField('name','שם','${(p.name||'').replace(/'/g,"\\'")}')">
-              <div class="srow-icon">👤</div><div class="srow-content"><div class="srow-label">שם</div><div class="srow-val">${p.name||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
-            </button>
-            <button class="srow" onclick="App.editWhy()">
-              <div class="srow-icon">💡</div><div class="srow-content"><div class="srow-label">למה אני עושה את זה</div><div class="srow-val">${(p.why||'').slice(0,40)||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
-            </button>
-          </div>
-          <div class="prof-section">
-            <div class="section-label">הטריגרים שלי</div>
-            <button class="srow" onclick="App.editTags('triggers','הטריגרים שלי')">
-              <div class="srow-icon">⚡</div><div class="srow-content"><div class="srow-label">טריגרים</div><div class="srow-val">${(p.triggers||[]).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div>
-            </button>
-          </div>
-          <div class="prof-section">
-            <div class="section-label">אסטרטגיות</div>
-            <button class="srow" onclick="App.editTags('helpingStrategies','מה עוזר לי')">
-              <div class="srow-icon">✅</div><div class="srow-content"><div class="srow-label">מה עוזר לי</div><div class="srow-val">${(p.helpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
-            </button>
-            <button class="srow" onclick="App.editTags('notHelpingStrategies','מה לא עוזר')">
-              <div class="srow-icon">❌</div><div class="srow-content"><div class="srow-label">מה לא עוזר</div><div class="srow-val">${(p.notHelpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
-            </button>
-          </div>
-          <div class="prof-section">
-            <div class="section-label">אנשי קשר לחירום</div>
-            <button class="srow" onclick="App.editContacts()">
-              <div class="srow-icon">📞</div><div class="srow-content"><div class="srow-label">אנשי קשר</div><div class="srow-val">${(p.emergencyContacts||[]).map(c=>c.name).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div>
-            </button>
-          </div>
-          <div class="prof-section">
-            <div class="section-label">AI וייצוא</div>
-            <button class="srow" onclick="App.editApiKey()">
-              <div class="srow-icon">🔑</div><div class="srow-content"><div class="srow-label">Gemini API Key</div><div class="srow-val">${p.geminiKey?'מוגדר ✓':'לא הוגדר'}</div></div><div class="srow-arrow">›</div>
-            </button>
-            <button class="srow" onclick="App.exportData()">
-              <div class="srow-icon">📤</div><div class="srow-content"><div class="srow-label">ייצוא נתונים</div></div><div class="srow-arrow">›</div>
-            </button>
-          </div>
-          <div class="spacer"></div>
-        </div>`;
-    },
-    afterRender(){}
-  };
+```
+      <button class="chat-send" id="chat-send" disabled onclick="Pages.chat.send()">➤</button>
+    </div>`;
+},
+afterRender(){const m=document.getElementById('chat-msgs');if(m)m.scrollTop=m.scrollHeight;},
+async send(){
+  const inp=document.getElementById('chat-input'),btn=document.getElementById('chat-send'),msgs=document.getElementById('chat-msgs');
+  if(!inp||!msgs)return;
+  const text=inp.value.trim();if(!text)return;
+  inp.value='';inp.style.height='auto';if(btn)btn.disabled=true;
+  msgs.innerHTML+=`<div class="chat-bubble user">${text.replace(/\n/g,'<br>')}</div>`;
+  Storage.addChatMessage('user',text);
+  msgs.innerHTML+=`<div class="chat-bubble typing ai" id="typing-ind"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+  try{
+    const history=Storage.getChatHistory().slice(-20);
+    const reply=await Gemini.chat(text,history.slice(0,-1));
+    document.getElementById('typing-ind')?.remove();
+    msgs.innerHTML+=`<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
+    Storage.addChatMessage('assistant',reply);
+  } catch(e){
+    document.getElementById('typing-ind')?.remove();
+    msgs.innerHTML+=`<div class="chat-bubble ai">${e.message==='NO_KEY'?'⚠️ הכנס Gemini API Key בפרופיל → הגדרות':'שגיאה. בדוק חיבור לרשת.'}</div>`;
+  }
+  msgs.scrollTop=msgs.scrollHeight;if(btn)btn.disabled=false;
+},
+clear(){App.confirm('לנקות את השיחה?','ההיסטוריה תימחק',()=>{Storage.clearChatHistory();App.nav('chat');});}
+```
 
-  return {dashboard,journal,insights,toolbox,chat,profile,moodEmoji,moodWords,TRIGGERS,DURATIONS,entryCard,formatDate};
+};
+
+// ── PROFILE ──────────────────────────────
+const profile = {
+render() {
+const p=Storage.getProfile();
+const joined=new Date(p.joinedAt||Date.now()).toLocaleDateString(‘he-IL’,{year:‘numeric’,month:‘long’,day:‘numeric’});
+return ` <div class="page" id="page-profile"> <div class="page-header"><span class="page-title">פרופיל</span></div> <div class="prof-hdr"> <div class="prof-avatar">🌱</div> <div class="prof-dname">${p.name||'אנונימי'}</div> <div class="prof-since">מ: ${joined}</div> </div> <div class="prof-section"> <div class="section-label">פרטים אישיים</div> <button class="srow" onclick="App.editProfileField('name','שם','${(p.name||'').replace(/'/g,"\\'")}')"> <div class="srow-icon">👤</div><div class="srow-content"><div class="srow-label">שם</div><div class="srow-val">${p.name||'לא הוגדר'}</div></div><div class="srow-arrow">›</div> </button> <button class="srow" onclick="App.editWhy()"> <div class="srow-icon">💡</div><div class="srow-content"><div class="srow-label">למה אני עושה את זה</div><div class="srow-val">${(p.why||'').slice(0,40)||'לא הוגדר'}</div></div><div class="srow-arrow">›</div> </button> </div> <div class="prof-section"> <div class="section-label">הטריגרים שלי</div> <button class="srow" onclick="App.editTags('triggers','הטריגרים שלי')"> <div class="srow-icon">⚡</div><div class="srow-content"><div class="srow-label">טריגרים</div><div class="srow-val">${(p.triggers||[]).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div> </button> </div> <div class="prof-section"> <div class="section-label">אסטרטגיות</div> <button class="srow" onclick="App.editTags('helpingStrategies','מה עוזר לי')"> <div class="srow-icon">✅</div><div class="srow-content"><div class="srow-label">מה עוזר לי</div><div class="srow-val">${(p.helpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div> </button> <button class="srow" onclick="App.editTags('notHelpingStrategies','מה לא עוזר')"> <div class="srow-icon">❌</div><div class="srow-content"><div class="srow-label">מה לא עוזר</div><div class="srow-val">${(p.notHelpingStrategies||[]).join(', ')||'לא הוגדר'}</div></div><div class="srow-arrow">›</div> </button> </div> <div class="prof-section"> <div class="section-label">אנשי קשר לחירום</div> <button class="srow" onclick="App.editContacts()"> <div class="srow-icon">📞</div><div class="srow-content"><div class="srow-label">אנשי קשר</div><div class="srow-val">${(p.emergencyContacts||[]).map(c=>c.name).join(', ')||'לא הוגדרו'}</div></div><div class="srow-arrow">›</div> </button> </div> <div class="prof-section"> <div class="section-label">AI וייצוא</div> <button class="srow" onclick="App.editApiKey()"> <div class="srow-icon">🔑</div><div class="srow-content"><div class="srow-label">Gemini API Key</div><div class="srow-val">${p.geminiKey?'מוגדר ✓':'לא הוגדר'}</div></div><div class="srow-arrow">›</div> </button> <button class="srow" onclick="App.exportData()"> <div class="srow-icon">📤</div><div class="srow-content"><div class="srow-label">ייצוא נתונים</div></div><div class="srow-arrow">›</div> </button> </div> <div class="spacer"></div> </div>`;
+},
+afterRender(){}
+};
+
+return {dashboard,journal,insights,toolbox,chat,profile,moodEmoji,moodWords,TRIGGERS,DURATIONS,entryCard,formatDate};
 })();
 
 // FreeMe — Main App Controller
 const App = (() => {
-  let currentPage = 'dashboard';
-  let breathingTimer = null;
-  let breathingPhase = 0;
-  let breathingCount = 0;
+let currentPage = ‘dashboard’;
+let breathingTimer = null;
+let breathingPhase = 0;
+let breathingCount = 0;
 
-  // ── Init ─────────────────────────────────
-  function init() {
-    const profile = Storage.getProfile();
-    if (!profile.onboardingDone) {
-      showOnboarding();
-    } else {
-      showApp();
-    }
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    }
+// ── Init ─────────────────────────────────
+function init() {
+const profile = Storage.getProfile();
+if (!profile.onboardingDone) {
+showOnboarding();
+} else {
+showApp();
+}
+if (‘serviceWorker’ in navigator) {
+navigator.serviceWorker.register(’./sw.js’).catch(()=>{});
+}
+}
+
+function showApp() {
+document.getElementById(‘loading-screen’).classList.add(‘hidden’);
+document.getElementById(‘app’).style.display = ‘’;
+nav(currentPage);
+}
+
+// ── Navigation ───────────────────────────
+function nav(page) {
+currentPage = page;
+const content = document.getElementById(‘main-content’);
+const pageMap = {
+dashboard: Pages.dashboard,
+journal:   Pages.journal,
+insights:  Pages.insights,
+toolbox:   Pages.toolbox,
+chat:      Pages.chat,
+profile:   Pages.profile
+};
+
+```
+const renderer = pageMap[page];
+if (!renderer) return;
+
+content.innerHTML = renderer.render();
+renderer.afterRender();
+
+// Update nav
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.classList.toggle('active', el.dataset.page === page);
+});
+
+content.scrollTop = 0;
+```
+
+}
+
+// ── SOS ──────────────────────────────────
+function showSOS() {
+document.getElementById(‘sos-overlay’).classList.remove(‘hidden’);
+}
+
+function hideSOS() {
+document.getElementById(‘sos-overlay’).classList.add(‘hidden’);
+}
+
+// ── Breathing ────────────────────────────
+function showBreathing() {
+hideSOS();
+document.getElementById(‘breathing-screen’).style.display = ‘flex’;
+startBreathingCycle();
+}
+
+function stopBreathing() {
+document.getElementById(‘breathing-screen’).style.display = ‘none’;
+if (breathingTimer) { clearInterval(breathingTimer); breathingTimer = null; }
+breathingPhase = 0; breathingCount = 0;
+}
+
+const BREATH_PHASES = [
+{ label: ‘שאף’, seconds: 4, instruction: ‘שאף לאט דרך האף…’ },
+{ label: ‘החזק’, seconds: 7, instruction: ‘החזק את האוויר…’ },
+{ label: ‘נשוף’, seconds: 8, instruction: ‘נשוף לאט דרך הפה…’ }
+];
+
+function startBreathingCycle() {
+breathingPhase = 0;
+breathingCount = 0;
+runBreathPhase();
+}
+
+function runBreathPhase() {
+const phase = BREATH_PHASES[breathingPhase];
+const countEl = document.getElementById(‘breath-count’);
+const phaseEl = document.getElementById(‘breath-phase’);
+const instrEl = document.getElementById(‘breath-instr’);
+if (!countEl) return;
+
+```
+phaseEl.textContent = phase.label;
+instrEl.textContent = phase.instruction;
+breathingCount = phase.seconds;
+countEl.textContent = breathingCount;
+
+if (breathingTimer) clearInterval(breathingTimer);
+breathingTimer = setInterval(() => {
+  breathingCount--;
+  if (countEl) countEl.textContent = breathingCount;
+  if (breathingCount <= 0) {
+    clearInterval(breathingTimer);
+    breathingPhase = (breathingPhase + 1) % BREATH_PHASES.length;
+    setTimeout(runBreathPhase, 400);
   }
+}, 1000);
+```
 
-  function showApp() {
-    document.getElementById('loading-screen').classList.add('hidden');
-    document.getElementById('app').style.display = '';
-    nav(currentPage);
-  }
+}
 
-  // ── Navigation ───────────────────────────
-  function nav(page) {
-    currentPage = page;
-    const content = document.getElementById('main-content');
-    const pageMap = {
-      dashboard: Pages.dashboard,
-      journal:   Pages.journal,
-      insights:  Pages.insights,
-      toolbox:   Pages.toolbox,
-      chat:      Pages.chat,
-      profile:   Pages.profile
-    };
+// ── Entry Form ───────────────────────────
+function showEntryForm(prefillType) {
+const modal = document.getElementById(‘entry-modal’);
+modal.querySelector(’.modal-body’).innerHTML = buildEntryForm(prefillType);
+openModal(‘entry-modal’);
+if (prefillType) selectEntryType(prefillType);
+}
 
-    const renderer = pageMap[page];
-    if (!renderer) return;
+function buildEntryForm(prefillType) {
+const moods = Pages.moodEmoji;
+const moodWords = Pages.moodWords;
+return `
+<div class="form-group">
+<div class="form-label">סוג הרשומה</div>
+<div class="type-sel">
+<button class="tsel-btn ${prefillType==='checkin'?'sel checkin':''}" data-type="checkin" onclick="selectEntryType('checkin')">
+<span class="tsel-emoji">📝</span><span>צ’ק-אין</span>
+</button>
+<button class="tsel-btn ${prefillType==='relapse'?'sel relapse':''}" data-type="relapse" onclick="selectEntryType('relapse')">
+<span class="tsel-emoji">⚠️</span><span>נפילה</span>
+</button>
+<button class="tsel-btn ${prefillType==='win'?'sel win':''}" data-type="win" onclick="selectEntryType('win')">
+<span class="tsel-emoji">🏆</span><span>ניצחון</span>
+</button>
+</div>
+</div>
 
-    content.innerHTML = renderer.render();
-    renderer.afterRender();
+```
+  <div class="form-group">
+    <div class="form-label">מצב רוח עכשיו</div>
+    <div class="mood-scale" id="mood-scale">
+      ${moods.map((e,i)=>`<button class="ms-btn" data-mood="${i+1}" onclick="selectMood(${i+1})" title="${moodWords[i]}">${e}</button>`).join('')}
+    </div>
+  </div>
 
-    // Update nav
-    document.querySelectorAll('.nav-item').forEach(el => {
-      el.classList.toggle('active', el.dataset.page === page);
-    });
+  <div class="form-group">
+    <div class="form-label">טריגרים — מה גרם לזה?</div>
+    <div class="trig-tags" id="trig-tags">
+      ${Pages.TRIGGERS.map(t=>`<button class="ttag" data-trigger="${t}" onclick="toggleTrigger('${t}')">${t}</button>`).join('')}
+    </div>
+  </div>
 
-    content.scrollTop = 0;
-  }
-
-  // ── SOS ──────────────────────────────────
-  function showSOS() {
-    document.getElementById('sos-overlay').classList.remove('hidden');
-  }
-
-  function hideSOS() {
-    document.getElementById('sos-overlay').classList.add('hidden');
-  }
-
-  // ── Breathing ────────────────────────────
-  function showBreathing() {
-    hideSOS();
-    document.getElementById('breathing-screen').style.display = 'flex';
-    startBreathingCycle();
-  }
-
-  function stopBreathing() {
-    document.getElementById('breathing-screen').style.display = 'none';
-    if (breathingTimer) { clearInterval(breathingTimer); breathingTimer = null; }
-    breathingPhase = 0; breathingCount = 0;
-  }
-
-  const BREATH_PHASES = [
-    { label: 'שאף', seconds: 4, instruction: 'שאף לאט דרך האף...' },
-    { label: 'החזק', seconds: 7, instruction: 'החזק את האוויר...' },
-    { label: 'נשוף', seconds: 8, instruction: 'נשוף לאט דרך הפה...' }
-  ];
-
-  function startBreathingCycle() {
-    breathingPhase = 0;
-    breathingCount = 0;
-    runBreathPhase();
-  }
-
-  function runBreathPhase() {
-    const phase = BREATH_PHASES[breathingPhase];
-    const countEl = document.getElementById('breath-count');
-    const phaseEl = document.getElementById('breath-phase');
-    const instrEl = document.getElementById('breath-instr');
-    if (!countEl) return;
-
-    phaseEl.textContent = phase.label;
-    instrEl.textContent = phase.instruction;
-    breathingCount = phase.seconds;
-    countEl.textContent = breathingCount;
-
-    if (breathingTimer) clearInterval(breathingTimer);
-    breathingTimer = setInterval(() => {
-      breathingCount--;
-      if (countEl) countEl.textContent = breathingCount;
-      if (breathingCount <= 0) {
-        clearInterval(breathingTimer);
-        breathingPhase = (breathingPhase + 1) % BREATH_PHASES.length;
-        setTimeout(runBreathPhase, 400);
-      }
-    }, 1000);
-  }
-
-  // ── Entry Form ───────────────────────────
-  function showEntryForm(prefillType) {
-    const modal = document.getElementById('entry-modal');
-    modal.querySelector('.modal-body').innerHTML = buildEntryForm(prefillType);
-    openModal('entry-modal');
-    if (prefillType) selectEntryType(prefillType);
-  }
-
-  function buildEntryForm(prefillType) {
-    const moods = Pages.moodEmoji;
-    const moodWords = Pages.moodWords;
-    return `
-      <div class="form-group">
-        <div class="form-label">סוג הרשומה</div>
-        <div class="type-sel">
-          <button class="tsel-btn ${prefillType==='checkin'?'sel checkin':''}" data-type="checkin" onclick="selectEntryType('checkin')">
-            <span class="tsel-emoji">📝</span><span>צ'ק-אין</span>
-          </button>
-          <button class="tsel-btn ${prefillType==='relapse'?'sel relapse':''}" data-type="relapse" onclick="selectEntryType('relapse')">
-            <span class="tsel-emoji">⚠️</span><span>נפילה</span>
-          </button>
-          <button class="tsel-btn ${prefillType==='win'?'sel win':''}" data-type="win" onclick="selectEntryType('win')">
-            <span class="tsel-emoji">🏆</span><span>ניצחון</span>
-          </button>
-        </div>
+  <div class="relapse-extra" id="relapse-extra">
+    <div class="form-group">
+      <div class="form-label">כמה זמן נמשך?</div>
+      <div class="dur-opts" id="dur-opts">
+        ${Pages.DURATIONS.map(d=>`<button class="dur-btn" data-dur="${d}" onclick="selectDuration('${d}')">${d}</button>`).join('')}
       </div>
+    </div>
+    <div class="form-group">
+      <div class="form-label">מה יכול היה לעזור לי לעצור?</div>
+      <textarea class="form-textarea" id="what-couldve-helped" placeholder="חשוב על זה בכנות..."></textarea>
+    </div>
+  </div>
 
-      <div class="form-group">
-        <div class="form-label">מצב רוח עכשיו</div>
-        <div class="mood-scale" id="mood-scale">
-          ${moods.map((e,i)=>`<button class="ms-btn" data-mood="${i+1}" onclick="selectMood(${i+1})" title="${moodWords[i]}">${e}</button>`).join('')}
-        </div>
-      </div>
+  <div class="form-group">
+    <div class="form-label">תיאור חופשי</div>
+    <textarea class="form-textarea" id="entry-desc" placeholder="איך היה? מה קרה לפני? מה אתה מרגיש?"></textarea>
+  </div>
 
-      <div class="form-group">
-        <div class="form-label">טריגרים — מה גרם לזה?</div>
-        <div class="trig-tags" id="trig-tags">
-          ${Pages.TRIGGERS.map(t=>`<button class="ttag" data-trigger="${t}" onclick="toggleTrigger('${t}')">${t}</button>`).join('')}
-        </div>
-      </div>
+  <div class="form-group">
+    <div class="form-label">מה עשיתי / אמרתי לעצמי</div>
+    <input class="form-input" id="entry-coping" placeholder="כלי התמודדות שהשתמשתי בו...">
+  </div>
 
-      <div class="relapse-extra" id="relapse-extra">
-        <div class="form-group">
-          <div class="form-label">כמה זמן נמשך?</div>
-          <div class="dur-opts" id="dur-opts">
-            ${Pages.DURATIONS.map(d=>`<button class="dur-btn" data-dur="${d}" onclick="selectDuration('${d}')">${d}</button>`).join('')}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-label">מה יכול היה לעזור לי לעצור?</div>
-          <textarea class="form-textarea" id="what-couldve-helped" placeholder="חשוב על זה בכנות..."></textarea>
-        </div>
-      </div>
+  <button class="btn btn-pri btn-full" onclick="App.saveEntry()">💾 שמור רשומה</button>
+  <div class="divider"></div>
+  <button class="btn btn-ghost btn-full" onclick="closeModal('entry-modal')">ביטול</button>
+`;
+```
 
-      <div class="form-group">
-        <div class="form-label">תיאור חופשי</div>
-        <textarea class="form-textarea" id="entry-desc" placeholder="איך היה? מה קרה לפני? מה אתה מרגיש?"></textarea>
-      </div>
+}
 
-      <div class="form-group">
-        <div class="form-label">מה עשיתי / אמרתי לעצמי</div>
-        <input class="form-input" id="entry-coping" placeholder="כלי התמודדות שהשתמשתי בו...">
-      </div>
+function saveEntry() {
+const typeBtn = document.querySelector(’.tsel-btn.sel’);
+const moodBtn = document.querySelector(’.ms-btn.sel’);
+const triggers = Array.from(document.querySelectorAll(’.ttag.sel’)).map(b=>b.dataset.trigger);
+const durBtn = document.querySelector(’.dur-btn.sel’);
 
-      <button class="btn btn-pri btn-full" onclick="App.saveEntry()">💾 שמור רשומה</button>
-      <div class="divider"></div>
-      <button class="btn btn-ghost btn-full" onclick="closeModal('entry-modal')">ביטול</button>
-    `;
-  }
+```
+if (!typeBtn) { toast('בחר סוג רשומה', 'err'); return; }
 
-  function saveEntry() {
-    const typeBtn = document.querySelector('.tsel-btn.sel');
-    const moodBtn = document.querySelector('.ms-btn.sel');
-    const triggers = Array.from(document.querySelectorAll('.ttag.sel')).map(b=>b.dataset.trigger);
-    const durBtn = document.querySelector('.dur-btn.sel');
+const entry = {
+  type: typeBtn.dataset.type,
+  mood: moodBtn ? parseInt(moodBtn.dataset.mood) : null,
+  triggers,
+  description: document.getElementById('entry-desc')?.value.trim() || '',
+  copingUsed: document.getElementById('entry-coping')?.value.trim() || '',
+};
 
-    if (!typeBtn) { toast('בחר סוג רשומה', 'err'); return; }
+if (entry.type === 'relapse') {
+  entry.relapseDuration = durBtn?.dataset.dur || '';
+  entry.whatCouldHelp = document.getElementById('what-couldve-helped')?.value.trim() || '';
+}
 
-    const entry = {
-      type: typeBtn.dataset.type,
-      mood: moodBtn ? parseInt(moodBtn.dataset.mood) : null,
-      triggers,
-      description: document.getElementById('entry-desc')?.value.trim() || '',
-      copingUsed: document.getElementById('entry-coping')?.value.trim() || '',
-    };
+const saved = Storage.addEntry(entry);
+closeModal('entry-modal');
+toast('רשומה נשמרה ✓', 'ok');
+nav(currentPage);
 
-    if (entry.type === 'relapse') {
-      entry.relapseDuration = durBtn?.dataset.dur || '';
-      entry.whatCouldHelp = document.getElementById('what-couldve-helped')?.value.trim() || '';
-    }
+// Get AI reflection async
+Gemini.reflectOnEntry(entry).then(reply => {
+  if (reply) toast('💬 AI: ' + reply.slice(0,60) + '...', 'ok');
+}).catch(()=>{});
+```
 
-    const saved = Storage.addEntry(entry);
-    closeModal('entry-modal');
-    toast('רשומה נשמרה ✓', 'ok');
-    nav(currentPage);
+}
 
-    // Get AI reflection async
-    Gemini.reflectOnEntry(entry).then(reply => {
-      if (reply) toast('💬 AI: ' + reply.slice(0,60) + '...', 'ok');
-    }).catch(()=>{});
-  }
+// ── View Entry ────────────────────────────
+function viewEntry(id) {
+const entry = Storage.getEntry(id);
+if (!entry) return;
+const typeLabel = {checkin:“צ’ק-אין”, relapse:‘נפילה’, win:‘ניצחון’}[entry.type];
+const typeColor = {checkin:‘var(–blue)’, relapse:‘var(–red)’, win:‘var(–green)’}[entry.type];
+const mood = entry.mood ? Pages.moodEmoji[entry.mood-1] + ’ ’ + Pages.moodWords[entry.mood-1] : ‘—’;
+const triggers = (entry.triggers||[]).join(’, ’) || ‘—’;
 
-  // ── View Entry ────────────────────────────
-  function viewEntry(id) {
-    const entry = Storage.getEntry(id);
-    if (!entry) return;
-    const typeLabel = {checkin:"צ'ק-אין", relapse:'נפילה', win:'ניצחון'}[entry.type];
-    const typeColor = {checkin:'var(--blue)', relapse:'var(--red)', win:'var(--green)'}[entry.type];
-    const mood = entry.mood ? Pages.moodEmoji[entry.mood-1] + ' ' + Pages.moodWords[entry.mood-1] : '—';
-    const triggers = (entry.triggers||[]).join(', ') || '—';
+```
+const body = `
+  <div style="margin-bottom:16px">
+    <span style="font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:${typeColor}">${typeLabel}</span>
+    <div style="font-size:.78rem;color:var(--t3);margin-top:3px">${new Date(entry.createdAt).toLocaleString('he-IL')}</div>
+  </div>
+  ${entry.description?`<div style="font-size:.9rem;color:var(--t1);line-height:1.7;margin-bottom:16px">${entry.description}</div>`:'' }
+  <div class="divider"></div>
+  <div style="display:grid;gap:10px;margin-bottom:16px">
+    <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מצב רוח</div><div style="font-size:.9rem">${mood}</div></div>
+    <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">טריגרים</div><div style="font-size:.9rem;color:var(--t1)">${triggers}</div></div>
+    ${entry.copingUsed?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">כלי התמודדות</div><div style="font-size:.9rem;color:var(--t1)">${entry.copingUsed}</div></div>`:''}
+    ${entry.type==='relapse'&&entry.relapseDuration?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">משך</div><div style="font-size:.9rem;color:var(--t1)">${entry.relapseDuration}</div></div>`:''}
+    ${entry.whatCouldHelp?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מה יכול היה לעזור</div><div style="font-size:.9rem;color:var(--t1)">${entry.whatCouldHelp}</div></div>`:''}
+  </div>
+  <button class="btn btn-dng btn-full" onclick="App.deleteEntry('${id}')">🗑️ מחק רשומה</button>
+`;
 
-    const body = `
-      <div style="margin-bottom:16px">
-        <span style="font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:${typeColor}">${typeLabel}</span>
-        <div style="font-size:.78rem;color:var(--t3);margin-top:3px">${new Date(entry.createdAt).toLocaleString('he-IL')}</div>
-      </div>
-      ${entry.description?`<div style="font-size:.9rem;color:var(--t1);line-height:1.7;margin-bottom:16px">${entry.description}</div>`:'' }
-      <div class="divider"></div>
-      <div style="display:grid;gap:10px;margin-bottom:16px">
-        <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מצב רוח</div><div style="font-size:.9rem">${mood}</div></div>
-        <div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">טריגרים</div><div style="font-size:.9rem;color:var(--t1)">${triggers}</div></div>
-        ${entry.copingUsed?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">כלי התמודדות</div><div style="font-size:.9rem;color:var(--t1)">${entry.copingUsed}</div></div>`:''}
-        ${entry.type==='relapse'&&entry.relapseDuration?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">משך</div><div style="font-size:.9rem;color:var(--t1)">${entry.relapseDuration}</div></div>`:''}
-        ${entry.whatCouldHelp?`<div><div style="font-size:.7rem;color:var(--t3);margin-bottom:2px">מה יכול היה לעזור</div><div style="font-size:.9rem;color:var(--t1)">${entry.whatCouldHelp}</div></div>`:''}
-      </div>
-      <button class="btn btn-dng btn-full" onclick="App.deleteEntry('${id}')">🗑️ מחק רשומה</button>
-    `;
+const modal = document.getElementById('entry-modal');
+modal.querySelector('.modal-title').textContent = typeLabel;
+modal.querySelector('.modal-body').innerHTML = body;
+openModal('entry-modal');
+```
 
-    const modal = document.getElementById('entry-modal');
-    modal.querySelector('.modal-title').textContent = typeLabel;
-    modal.querySelector('.modal-body').innerHTML = body;
-    openModal('entry-modal');
-  }
+}
 
-  function deleteEntry(id) {
-    confirm('למחוק את הרשומה?', 'פעולה זו אינה ניתנת לביטול', () => {
-      Storage.deleteEntry(id);
-      closeModal('entry-modal');
-      toast('נמחק', 'ok');
-      nav(currentPage);
-    });
-  }
+function deleteEntry(id) {
+confirm(‘למחוק את הרשומה?’, ‘פעולה זו אינה ניתנת לביטול’, () => {
+Storage.deleteEntry(id);
+closeModal(‘entry-modal’);
+toast(‘נמחק’, ‘ok’);
+nav(currentPage);
+});
+}
 
-  // ── SOS Chat ─────────────────────────────
-  async function sosChatAI() {
-    hideSOS();
-    nav('chat');
-    setTimeout(async () => {
-      const feeling = document.querySelector('#sos-feeling')?.value || '';
-      const msgs = document.getElementById('chat-msgs');
-      if (!msgs) return;
-      msgs.innerHTML += `<div class="chat-bubble user">אני במצב קשה עכשיו ומצטרך עזרה.</div>`;
-      msgs.innerHTML += `<div class="chat-bubble typing ai" id="typing-sos"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
-      msgs.scrollTop = msgs.scrollHeight;
-      try {
-        const reply = await Gemini.handleSOS(feeling);
-        document.getElementById('typing-sos')?.remove();
-        msgs.innerHTML += `<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
-        Storage.addChatMessage('assistant', reply);
-        msgs.scrollTop = msgs.scrollHeight;
-      } catch(e) {
-        document.getElementById('typing-sos')?.remove();
-      }
-    }, 300);
-  }
+// ── SOS Chat ─────────────────────────────
+async function sosChatAI() {
+hideSOS();
+nav(‘chat’);
+setTimeout(async () => {
+const feeling = document.querySelector(’#sos-feeling’)?.value || ‘’;
+const msgs = document.getElementById(‘chat-msgs’);
+if (!msgs) return;
+msgs.innerHTML += `<div class="chat-bubble user">אני במצב קשה עכשיו ומצטרך עזרה.</div>`;
+msgs.innerHTML += `<div class="chat-bubble typing ai" id="typing-sos"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
+msgs.scrollTop = msgs.scrollHeight;
+try {
+const reply = await Gemini.handleSOS(feeling);
+document.getElementById(‘typing-sos’)?.remove();
+msgs.innerHTML += `<div class="chat-bubble ai">${reply.replace(/\n/g,'<br>')}</div>`;
+Storage.addChatMessage(‘assistant’, reply);
+msgs.scrollTop = msgs.scrollHeight;
+} catch(e) {
+document.getElementById(‘typing-sos’)?.remove();
+}
+}, 300);
+}
 
-  // ── Modals ───────────────────────────────
-  function openModal(id) {
-    document.getElementById(id)?.classList.add('open');
-  }
+// ── Modals ───────────────────────────────
+function openModal(id) {
+document.getElementById(id)?.classList.add(‘open’);
+}
 
-  function closeModal(id) {
-    document.getElementById(id)?.classList.remove('open');
-  }
+function closeModal(id) {
+document.getElementById(id)?.classList.remove(‘open’);
+}
 
-  function showModalSimple(title, bodyHtml) {
-    const m = document.getElementById('entry-modal');
-    m.querySelector('.modal-title').textContent = title;
-    m.querySelector('.modal-body').innerHTML = bodyHtml;
-    openModal('entry-modal');
-  }
+function showModalSimple(title, bodyHtml) {
+const m = document.getElementById(‘entry-modal’);
+m.querySelector(’.modal-title’).textContent = title;
+m.querySelector(’.modal-body’).innerHTML = bodyHtml;
+openModal(‘entry-modal’);
+}
 
-  // ── Profile Editing ───────────────────────
-  function editProfileField(field, label, current) {
-    showModalSimple(`ערוך: ${label}`, `
-      <div class="form-group">
-        <div class="form-label">${label}</div>
-        <input class="form-input" id="pf-input" value="${current||''}" placeholder="${label}">
-      </div>
-      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('${field}',document.getElementById('pf-input').value)">שמור</button>
-    `);
-    setTimeout(() => document.getElementById('pf-input')?.focus(), 200);
-  }
+// ── Profile Editing ───────────────────────
+function editProfileField(field, label, current) {
+showModalSimple(`ערוך: ${label}`, `<div class="form-group"> <div class="form-label">${label}</div> <input class="form-input" id="pf-input" value="${current||''}" placeholder="${label}"> </div> <button class="btn btn-pri btn-full" onclick="App.saveProfileField('${field}',document.getElementById('pf-input').value)">שמור</button>`);
+setTimeout(() => document.getElementById(‘pf-input’)?.focus(), 200);
+}
 
-  function saveProfileField(field, value) {
-    Storage.updateProfile({ [field]: value.trim() });
-    closeModal('entry-modal');
-    toast('נשמר ✓', 'ok');
-    nav('profile');
-  }
+function saveProfileField(field, value) {
+Storage.updateProfile({ [field]: value.trim() });
+closeModal(‘entry-modal’);
+toast(‘נשמר ✓’, ‘ok’);
+nav(‘profile’);
+}
 
-  function editWhy() {
-    const p = Storage.getProfile();
-    showModalSimple('למה אני עושה את זה', `
-      <div class="form-group">
-        <div class="form-label">הסיבה האמיתית שלי</div>
-        <textarea class="form-textarea" id="why-input" placeholder="מה מוביל אותי לשינוי? מה אני רוצה להרוויח מזה?">${p.why||''}</textarea>
-        <div class="form-hint">זה יוצג ל-AI כדי לתמוך בך טוב יותר</div>
-      </div>
-      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('why',document.getElementById('why-input').value)">שמור</button>
-    `);
-    setTimeout(() => document.getElementById('why-input')?.focus(), 200);
-  }
+function editWhy() {
+const p = Storage.getProfile();
+showModalSimple(‘למה אני עושה את זה’, `<div class="form-group"> <div class="form-label">הסיבה האמיתית שלי</div> <textarea class="form-textarea" id="why-input" placeholder="מה מוביל אותי לשינוי? מה אני רוצה להרוויח מזה?">${p.why||''}</textarea> <div class="form-hint">זה יוצג ל-AI כדי לתמוך בך טוב יותר</div> </div> <button class="btn btn-pri btn-full" onclick="App.saveProfileField('why',document.getElementById('why-input').value)">שמור</button>`);
+setTimeout(() => document.getElementById(‘why-input’)?.focus(), 200);
+}
 
-  function editTags(field, label) {
-    const p = Storage.getProfile();
-    const current = p[field] || [];
-    const renderTags = () => current.map((t,i) => `
-      <div class="tw-tag">
-        <span>${t}</span>
-        <button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button>
-      </div>`).join('');
+function editTags(field, label) {
+const p = Storage.getProfile();
+const current = p[field] || [];
+const renderTags = () => current.map((t,i) => ` <div class="tw-tag"> <span>${t}</span> <button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button> </div>`).join(’’);
 
-    showModalSimple(label, `
-      <div class="form-group">
-        <div class="tags-display" id="tags-display">${renderTags()}</div>
-        <div class="tw-input-row">
-          <input class="form-input" id="tag-input" placeholder="הוסף פריט..." onkeydown="if(event.key==='Enter'){App._addTag('${field}');event.preventDefault()}">
-          <button class="btn btn-sec" onclick="App._addTag('${field}')">+</button>
-        </div>
-      </div>
-      <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
-    `);
-    setTimeout(() => document.getElementById('tag-input')?.focus(), 200);
-  }
+```
+showModalSimple(label, `
+  <div class="form-group">
+    <div class="tags-display" id="tags-display">${renderTags()}</div>
+    <div class="tw-input-row">
+      <input class="form-input" id="tag-input" placeholder="הוסף פריט..." onkeydown="if(event.key==='Enter'){App._addTag('${field}');event.preventDefault()}">
+      <button class="btn btn-sec" onclick="App._addTag('${field}')">+</button>
+    </div>
+  </div>
+  <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
+`);
+setTimeout(() => document.getElementById('tag-input')?.focus(), 200);
+```
 
-  function _addTag(field) {
-    const inp = document.getElementById('tag-input');
-    const val = inp?.value.trim();
-    if (!val) return;
-    const p = Storage.getProfile();
-    const arr = [...(p[field]||[]), val];
-    Storage.updateProfile({ [field]: arr });
-    inp.value = '';
-    const disp = document.getElementById('tags-display');
-    if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join('');
-  }
+}
 
-  function _removeTag(field, idx) {
-    const p = Storage.getProfile();
-    const arr = [...(p[field]||[])];
-    arr.splice(idx,1);
-    Storage.updateProfile({ [field]: arr });
-    const disp = document.getElementById('tags-display');
-    if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join('');
-  }
+function _addTag(field) {
+const inp = document.getElementById(‘tag-input’);
+const val = inp?.value.trim();
+if (!val) return;
+const p = Storage.getProfile();
+const arr = […(p[field]||[]), val];
+Storage.updateProfile({ [field]: arr });
+inp.value = ‘’;
+const disp = document.getElementById(‘tags-display’);
+if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join(’’);
+}
 
-  function editContacts() {
-    const p = Storage.getProfile();
-    const contacts = p.emergencyContacts || [];
+function _removeTag(field, idx) {
+const p = Storage.getProfile();
+const arr = […(p[field]||[])];
+arr.splice(idx,1);
+Storage.updateProfile({ [field]: arr });
+const disp = document.getElementById(‘tags-display’);
+if (disp) disp.innerHTML = arr.map((t,i)=>`<div class="tw-tag"><span>${t}</span><button class="tw-rem" onclick="App._removeTag('${field}',${i})">×</button></div>`).join(’’);
+}
 
-    const renderContacts = () => contacts.map((c,i) => `
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
-        <div style="flex:1">
-          <div style="font-size:.87rem;font-weight:500">${c.name}</div>
-          <div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div>
-        </div>
-        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
-      </div>`).join('');
+function editContacts() {
+const p = Storage.getProfile();
+const contacts = p.emergencyContacts || [];
 
-    showModalSimple('אנשי קשר לחירום', `
-      <div id="contacts-list">${renderContacts()}</div>
-      <div style="display:grid;gap:8px;margin-top:14px">
-        <input class="form-input" id="c-name" placeholder="שם">
-        <input class="form-input" id="c-phone" placeholder="מספר טלפון" type="tel" dir="ltr">
-        <button class="btn btn-sec" onclick="App._addContact()">+ הוסף</button>
-      </div>
-      <div class="divider"></div>
-      <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
-    `);
-  }
+```
+const renderContacts = () => contacts.map((c,i) => `
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
+    <div style="flex:1">
+      <div style="font-size:.87rem;font-weight:500">${c.name}</div>
+      <div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div>
+    </div>
+    <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
+  </div>`).join('');
 
-  function _addContact() {
-    const name = document.getElementById('c-name')?.value.trim();
-    const phone = document.getElementById('c-phone')?.value.trim();
-    if (!name || !phone) { toast('מלא שם וטלפון', 'err'); return; }
-    const p = Storage.getProfile();
-    const contacts = [...(p.emergencyContacts||[]), {name, phone}];
-    Storage.updateProfile({ emergencyContacts: contacts });
-    document.getElementById('c-name').value = '';
-    document.getElementById('c-phone').value = '';
-    const list = document.getElementById('contacts-list');
-    if (list) list.innerHTML = contacts.map((c,i)=>`
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
-        <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div>
-        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
-      </div>`).join('');
-  }
+showModalSimple('אנשי קשר לחירום', `
+  <div id="contacts-list">${renderContacts()}</div>
+  <div style="display:grid;gap:8px;margin-top:14px">
+    <input class="form-input" id="c-name" placeholder="שם">
+    <input class="form-input" id="c-phone" placeholder="מספר טלפון" type="tel" dir="ltr">
+    <button class="btn btn-sec" onclick="App._addContact()">+ הוסף</button>
+  </div>
+  <div class="divider"></div>
+  <button class="btn btn-pri btn-full" onclick="closeModal('entry-modal');App.nav('profile')">סגור</button>
+`);
+```
 
-  function _removeContact(idx) {
-    const p = Storage.getProfile();
-    const contacts = [...(p.emergencyContacts||[])];
-    contacts.splice(idx, 1);
-    Storage.updateProfile({ emergencyContacts: contacts });
-    const list = document.getElementById('contacts-list');
-    if (list) list.innerHTML = contacts.map((c,i)=>`
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)">
-        <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div>
-        <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button>
-      </div>`).join('');
-  }
+}
 
-  function editApiKey() {
-    const p = Storage.getProfile();
-    showModalSimple('Gemini API Key', `
-      <div class="form-group">
-        <div class="form-label">API Key</div>
-        <input class="form-input" id="api-key-input" value="${p.geminiKey||''}" placeholder="AIza..." dir="ltr">
-        <div class="form-hint">ניתן לקבל חינם ב-aistudio.google.com</div>
-      </div>
-      <button class="btn btn-pri btn-full" onclick="App.saveProfileField('geminiKey',document.getElementById('api-key-input').value)">שמור</button>
-    `);
-    setTimeout(() => document.getElementById('api-key-input')?.focus(), 200);
-  }
+function _addContact() {
+const name = document.getElementById(‘c-name’)?.value.trim();
+const phone = document.getElementById(‘c-phone’)?.value.trim();
+if (!name || !phone) { toast(‘מלא שם וטלפון’, ‘err’); return; }
+const p = Storage.getProfile();
+const contacts = […(p.emergencyContacts||[]), {name, phone}];
+Storage.updateProfile({ emergencyContacts: contacts });
+document.getElementById(‘c-name’).value = ‘’;
+document.getElementById(‘c-phone’).value = ‘’;
+const list = document.getElementById(‘contacts-list’);
+if (list) list.innerHTML = contacts.map((c,i)=>` <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)"> <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div> <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button> </div>`).join(’’);
+}
 
-  // ── Export ────────────────────────────────
-  function exportData() {
-    const data = {
-      exportedAt: new Date().toISOString(),
-      entries: Storage.getEntries(),
-      stats: Storage.getStats()
-    };
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = `freeme-export-${new Date().toISOString().slice(0,10)}.json`;
-    a.click(); URL.revokeObjectURL(url);
-    toast('נתונים יוצאו ✓', 'ok');
-  }
+function _removeContact(idx) {
+const p = Storage.getProfile();
+const contacts = […(p.emergencyContacts||[])];
+contacts.splice(idx, 1);
+Storage.updateProfile({ emergencyContacts: contacts });
+const list = document.getElementById(‘contacts-list’);
+if (list) list.innerHTML = contacts.map((c,i)=>` <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--bg-3);padding:10px 14px;border-radius:var(--r2)"> <div style="flex:1"><div style="font-size:.87rem;font-weight:500">${c.name}</div><div style="font-size:.75rem;color:var(--t3)" dir="ltr">${c.phone}</div></div> <button onclick="App._removeContact(${i})" style="color:var(--red);font-size:1.1rem">×</button> </div>`).join(’’);
+}
 
-  // ── Onboarding ────────────────────────────
-  let obStep = 0;
-  const OB_STEPS = 4;
+function editApiKey() {
+const p = Storage.getProfile();
+showModalSimple(‘Gemini API Key’, `<div class="form-group"> <div class="form-label">API Key</div> <input class="form-input" id="api-key-input" value="${p.geminiKey||''}" placeholder="AIza..." dir="ltr"> <div class="form-hint">ניתן לקבל חינם ב-aistudio.google.com</div> </div> <button class="btn btn-pri btn-full" onclick="App.saveProfileField('geminiKey',document.getElementById('api-key-input').value)">שמור</button>`);
+setTimeout(() => document.getElementById(‘api-key-input’)?.focus(), 200);
+}
 
-  function showOnboarding() {
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('loading-screen').classList.add('hidden');
-    document.getElementById('onboarding-screen').style.display = 'flex';
-    obStep = 0;
-    updateOnboarding();
-  }
+// ── Export ────────────────────────────────
+function exportData() {
+const data = {
+exportedAt: new Date().toISOString(),
+entries: Storage.getEntries(),
+stats: Storage.getStats()
+};
+const blob = new Blob([JSON.stringify(data, null, 2)], {type:‘application/json’});
+const url = URL.createObjectURL(blob);
+const a = document.createElement(‘a’);
+a.href = url; a.download = `freeme-export-${new Date().toISOString().slice(0,10)}.json`;
+a.click(); URL.revokeObjectURL(url);
+toast(‘נתונים יוצאו ✓’, ‘ok’);
+}
 
-  function updateOnboarding() {
-    document.querySelectorAll('.ob-step').forEach((el,i) => {
-      el.classList.toggle('active', i === obStep);
-    });
-    document.querySelectorAll('.pdot').forEach((el,i) => {
-      el.classList.toggle('active', i === obStep);
-    });
-  }
+// ── Onboarding ────────────────────────────
+let obStep = 0;
+const OB_STEPS = 4;
 
-  function nextOBStep() {
-    if (obStep === 0) {
-      const name = document.getElementById('ob-name')?.value.trim();
-      if (!name) { toast('הכנס שם כלשהו', 'err'); return; }
-      Storage.updateProfile({ name });
-    }
-    if (obStep === 1) {
-      const why = document.getElementById('ob-why')?.value.trim();
-      Storage.updateProfile({ why: why || '' });
-    }
-    if (obStep === 2) {
-      const triggers = Array.from(document.querySelectorAll('.ob-trigger.sel')).map(b=>b.dataset.t);
-      Storage.updateProfile({ triggers });
-    }
-    if (obStep === 3) {
-      const helps = document.getElementById('ob-helps')?.value.trim();
-      const key = document.getElementById('ob-key')?.value.trim();
-      Storage.updateProfile({
-        helpingStrategies: helps ? helps.split('\n').filter(Boolean) : [],
-        geminiKey: key || Storage.DEFAULT_API_KEY,
-        onboardingDone: true
-      });
-      finishOnboarding();
-      return;
-    }
-    obStep++;
-    updateOnboarding();
-  }
+function showOnboarding() {
+document.getElementById(‘app’).style.display = ‘none’;
+document.getElementById(‘loading-screen’).classList.add(‘hidden’);
+document.getElementById(‘onboarding-screen’).style.display = ‘flex’;
+obStep = 0;
+updateOnboarding();
+}
 
-  function prevOBStep() {
-    if (obStep > 0) { obStep--; updateOnboarding(); }
-  }
+function updateOnboarding() {
+document.querySelectorAll(’.ob-step’).forEach((el,i) => {
+el.classList.toggle(‘active’, i === obStep);
+});
+document.querySelectorAll(’.pdot’).forEach((el,i) => {
+el.classList.toggle(‘active’, i === obStep);
+});
+}
 
-  function finishOnboarding() {
-    document.getElementById('onboarding-screen').style.display = 'none';
-    document.getElementById('app').style.display = '';
-    showApp();
-    toast('ברוך הבא! 🌱', 'ok');
-  }
+function nextOBStep() {
+if (obStep === 0) {
+const name = document.getElementById(‘ob-name’)?.value.trim();
+if (!name) { toast(‘הכנס שם כלשהו’, ‘err’); return; }
+Storage.updateProfile({ name });
+}
+if (obStep === 1) {
+const why = document.getElementById(‘ob-why’)?.value.trim();
+Storage.updateProfile({ why: why || ‘’ });
+}
+if (obStep === 2) {
+const triggers = Array.from(document.querySelectorAll(’.ob-trigger.sel’)).map(b=>b.dataset.t);
+Storage.updateProfile({ triggers });
+}
+if (obStep === 3) {
+const helps = document.getElementById(‘ob-helps’)?.value.trim();
+const key = document.getElementById(‘ob-key’)?.value.trim();
+Storage.updateProfile({
+helpingStrategies: helps ? helps.split(’\n’).filter(Boolean) : [],
+geminiKey: key,
+onboardingDone: true
+});
+finishOnboarding();
+return;
+}
+obStep++;
+updateOnboarding();
+}
 
-  // ── Toast ─────────────────────────────────
-  let toastTimer = null;
-  function toast(msg, type='') {
-    const el = document.getElementById('toast');
-    if (!el) return;
-    el.textContent = msg;
-    el.className = `toast ${type} show`;
-    if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
-  }
+function prevOBStep() {
+if (obStep > 0) { obStep–; updateOnboarding(); }
+}
 
-  // ── Confirm ───────────────────────────────
-  function confirm(title, desc, onConfirm) {
-    document.getElementById('confirm-title').textContent = title;
-    document.getElementById('confirm-desc').textContent = desc;
-    document.getElementById('confirm-ok').onclick = () => {
-      document.getElementById('confirm-dlg').classList.remove('open');
-      onConfirm();
-    };
-    document.getElementById('confirm-cancel').onclick = () => {
-      document.getElementById('confirm-dlg').classList.remove('open');
-    };
-    document.getElementById('confirm-dlg').classList.add('open');
-  }
+function finishOnboarding() {
+document.getElementById(‘onboarding-screen’).style.display = ‘none’;
+document.getElementById(‘app’).style.display = ‘’;
+showApp();
+toast(‘ברוך הבא! 🌱’, ‘ok’);
+}
 
-  return {
-    init, nav, showApp, showSOS, hideSOS,
-    showBreathing, stopBreathing,
-    showEntryForm, saveEntry, viewEntry, deleteEntry,
-    sosChatAI, openModal, closeModal, showModalSimple,
-    editProfileField, saveProfileField, editWhy, editTags,
-    _addTag, _removeTag, editContacts, _addContact, _removeContact,
-    editApiKey, exportData,
-    showOnboarding, nextOBStep, prevOBStep,
-    toast, confirm
-  };
+// ── Toast ─────────────────────────────────
+let toastTimer = null;
+function toast(msg, type=’’) {
+const el = document.getElementById(‘toast’);
+if (!el) return;
+el.textContent = msg;
+el.className = `toast ${type} show`;
+if (toastTimer) clearTimeout(toastTimer);
+toastTimer = setTimeout(() => el.classList.remove(‘show’), 3200);
+}
+
+// ── Confirm ───────────────────────────────
+function confirm(title, desc, onConfirm) {
+document.getElementById(‘confirm-title’).textContent = title;
+document.getElementById(‘confirm-desc’).textContent = desc;
+document.getElementById(‘confirm-ok’).onclick = () => {
+document.getElementById(‘confirm-dlg’).classList.remove(‘open’);
+onConfirm();
+};
+document.getElementById(‘confirm-cancel’).onclick = () => {
+document.getElementById(‘confirm-dlg’).classList.remove(‘open’);
+};
+document.getElementById(‘confirm-dlg’).classList.add(‘open’);
+}
+
+return {
+init, nav, showApp, showSOS, hideSOS,
+showBreathing, stopBreathing,
+showEntryForm, saveEntry, viewEntry, deleteEntry,
+sosChatAI, openModal, closeModal, showModalSimple,
+editProfileField, saveProfileField, editWhy, editTags,
+_addTag, _removeTag, editContacts, _addContact, _removeContact,
+editApiKey, exportData,
+showOnboarding, nextOBStep, prevOBStep,
+toast, confirm
+};
 })();
 
 // ── Global helpers (called from inline HTML) ──────────────
 function selectEntryType(type) {
-  document.querySelectorAll('.tsel-btn').forEach(b => {
-    b.className = `tsel-btn ${b.dataset.type===type?'sel '+type:''}`;
-  });
-  const extra = document.getElementById('relapse-extra');
-  if (extra) extra.classList.toggle('vis', type==='relapse');
+document.querySelectorAll(’.tsel-btn’).forEach(b => {
+b.className = `tsel-btn ${b.dataset.type===type?'sel '+type:''}`;
+});
+const extra = document.getElementById(‘relapse-extra’);
+if (extra) extra.classList.toggle(‘vis’, type===‘relapse’);
 }
 
 function selectMood(n) {
-  document.querySelectorAll('.ms-btn').forEach(b => {
-    b.classList.toggle('sel', parseInt(b.dataset.mood)===n);
-  });
+document.querySelectorAll(’.ms-btn’).forEach(b => {
+b.classList.toggle(‘sel’, parseInt(b.dataset.mood)===n);
+});
 }
 
 function toggleTrigger(t) {
-  const btn = document.querySelector(`.ttag[data-trigger="${t}"]`);
-  if (btn) btn.classList.toggle('sel');
+const btn = document.querySelector(`.ttag[data-trigger="${t}"]`);
+if (btn) btn.classList.toggle(‘sel’);
 }
 
 function selectDuration(d) {
-  document.querySelectorAll('.dur-btn').forEach(b => {
-    b.classList.toggle('sel', b.dataset.dur===d);
-  });
+document.querySelectorAll(’.dur-btn’).forEach(b => {
+b.classList.toggle(‘sel’, b.dataset.dur===d);
+});
 }
 
 function closeModal(id) { App.closeModal(id); }
 
-window.addEventListener('DOMContentLoaded', () => App.init());
+window.addEventListener(‘DOMContentLoaded’, () => App.init());
 </script>
+
 </body>
 </html>
